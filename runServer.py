@@ -2,7 +2,7 @@ import math
 import os
 import sys
 
-#Check commands
+#Check args
 if (len(sys.argv)) != 6:
     print("This command takes 5 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n)\n")
     exit()
