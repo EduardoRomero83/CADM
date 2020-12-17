@@ -1,0 +1,47 @@
+RF.10.8.18.6.0.serverperf
+# started on Thu May 21 19:06:26 2020
+
+0,,cpu-cycles:u,6111832904,80.09,,
+27574705379,,instructions:u,6862984730,89.93,,
+1922527991,,branches:u,6874085750,90.08,,
+87066302,,branch-misses:u,6867366843,89.99,4.53,of all branches
+3870425,,cache-references:u,6864273834,89.95,,
+32487,,cache-misses:u,6863930449,89.95,0.839,of all cache refs
+4253851344,,L1-dcache-loads:u,6868604090,90.01,,
+76497075,,L1-dcache-load-misses:u,6861918557,89.92,1.80,of all L1-dcache hits
+1156792,,LLC-loads:u,6869743537,90.02,,
+4931,,LLC-load-misses:u,6867145012,89.99,0.43,of all LL-cache hits
+RF.10.8.18.6.1.serverperf
+# started on Thu May 21 19:08:23 2020
+
+0,,cpu-cycles:u,7464398586,80.22,,
+30559205125,,instructions:u,8384759438,90.11,,
+2420838885,,branches:u,8366973286,89.92,,
+95325326,,branch-misses:u,8369427737,89.94,3.94,of all branches
+4542754,,cache-references:u,8376616829,90.02,,
+16407,,cache-misses:u,8371509803,89.97,0.361,of all cache refs
+5030017057,,L1-dcache-loads:u,8368218179,89.93,,
+136192516,,L1-dcache-load-misses:u,8369171319,89.94,2.71,of all L1-dcache hits
+1957623,,LLC-loads:u,8378552421,90.04,,
+7773,,LLC-load-misses:u,8375652912,90.01,0.40,of all LL-cache hits
+RF.10.8.18.6.acc.python.txt
+Accuracy: 0.580649184104
+4.7523829937
+RF.10.8.18.6.acc.server.txt
+Server Accuracy: 0.519482857143
+RF.10.8.18.6.pythonperf
+# started on Thu May 21 19:05:01 2020
+
+0,,cpu-cycles:u,22026709212,79.95,,
+69015722819,,instructions:u,24787797399,89.98,,
+10729169531,,branches:u,24803048370,90.03,,
+116441250,,branch-misses:u,24797097709,90.01,1.09,of all branches
+253197329,,cache-references:u,24784647145,89.96,,
+124269039,,cache-misses:u,24789595632,89.98,49.080,of all cache refs
+20678796840,,L1-dcache-loads:u,24805724196,90.04,,
+223240305,,L1-dcache-load-misses:u,24805257224,90.04,1.08,of all L1-dcache hits
+58282478,,LLC-loads:u,24793938153,90.00,,
+24464072,,LLC-load-misses:u,24788144999,89.98,41.98,of all LL-cache hits
+RF.10.8.18.6.time.txt
+Total: 4.359190
+a: 0 

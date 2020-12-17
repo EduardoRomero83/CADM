@@ -1,0 +1,2 @@
+perf stat --field-separator=, -o ./ResearchData/baseline/baseServer.txt -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses ./ResearchData/baseline/a.out RF.100.14.20.4
+perf stat --field-separator=, -o ./ResearchData/baseline/basePython.txt -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python ReseacrhData/baseline/test.py RF.100.14.20.4

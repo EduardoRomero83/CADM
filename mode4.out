@@ -1,0 +1,110 @@
+Are we aligned 2076   --> 290640  div 140
+Listening on socket
+clusterSign 16, common: b2000000, imp: fb800000 
+Feature: 0 and value: 5 
+Feature: 4 and value: 35 
+Feature: 4 and value: 65 
+Feature: 7 and value: 5 
+Feature: 8 and value: 25 
+Feature: 8 and value: 35 
+Feature: 8 and value: 45 
+Feature: 9 and value: 15 
+Feature: 10 and value: 2305 
+Feature: 5 and value: 15 
+Feature: 6 and value: 400 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+clusterSign 17, common: ea000000, imp: ef000000 
+Feature: 0 and value: 5 
+Feature: 4 and value: 35 
+Feature: 4 and value: 65 
+Feature: 6 and value: 20 
+Feature: 7 and value: 5 
+Feature: 8 and value: 25 
+Feature: 8 and value: 45 
+Feature: 10 and value: 2305 
+Feature: 8 and value: 35 
+Feature: 9 and value: 15 
+Feature: 10 and value: 2335 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+clusterSign 18, common: c0000000, imp: e8000000 
+Feature: 0 and value: 5 
+Feature: 7 and value: 5 
+Feature: 8 and value: 25 
+Feature: 8 and value: 45 
+Feature: 10 and value: 2305 
+Feature: 4 and value: 35 
+Feature: 4 and value: 65 
+Feature: 6 and value: 20 
+Feature: 8 and value: 35 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+clusterSign 19, common: 82c00000, imp: bfc00000 
+Feature: 1 and value: 5 
+Feature: 4 and value: 75 
+Feature: 7 and value: 635 
+Feature: 7 and value: 1795 
+Feature: 8 and value: 15 
+Feature: 8 and value: 25 
+Feature: 8 and value: 45 
+Feature: 9 and value: 5 
+Feature: 9 and value: 25 
+Feature: 10 and value: 2305 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+clusterSign 20, common: 87000000, imp: df000000 
+Feature: 1 and value: 5 
+Feature: 7 and value: 635 
+Feature: 7 and value: 1795 
+Feature: 8 and value: 15 
+Feature: 8 and value: 25 
+Feature: 8 and value: 45 
+Feature: 9 and value: 25 
+Feature: 10 and value: 2305 
+Feature: 3 and value: 660 
+Feature: 6 and value: 425 
+Feature: 8 and value: 35 
+Feature: 9 and value: 5 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Feature: 0 and value: 0 
+Reading data from socket 4 of size 0
+110, 110 
+Forking processesStarting to test and timings 
