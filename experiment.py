@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+from trainOgForest import manipData
 
 numTrees = ["10"]
 depth = ["8"]
@@ -11,6 +12,14 @@ maxUnk = ["6"]
 #mpc = ["20"]
 #maxUnk = ["4"]
 
+if os.path.exists('./trainOgForest/SplitData.pkl'):
+    print('SplitData.pkl exists; proceeding with experiment')
+else:
+    print('SplitData.pkl does not exist; creating SplitData.pkl')
+    manipData.doEverything()
+    print('created SplitData.pkl; proceeding with experiment')
+
+print('Running experiment')
 cmd = []
 for n in numTrees:
     for d in depth:
@@ -25,7 +34,7 @@ for n in numTrees:
                     f.write("False")
                     f.close()
                 #time.sleep(10)
-                treeName = "RF." + n + "." + d + "." + m + "." + u 
+                treeName = "RF." + n + "." + d + "." + m + "." + u
                 print(treeName)
                 cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, "700000", "0", "y"]
                 p1 = subprocess.Popen(cmd)
@@ -38,7 +47,7 @@ for n in numTrees:
                 cmd = ["python3", "./ResearchData/process.py", treeName]
                 p1.wait()
                 p4 = subprocess.call(cmd)
-        
+
 
 cmd = ["python3", "./ResearchData/ultimate.py"]
 subprocess.call(cmd)
