@@ -14,9 +14,21 @@ cd CADM
 mv path/to/TrafficEvents_Aug16_Dec19_Publish.csv trainOgForest/
 ```
 
-4. Run `experiment.py` using Python 3
+4. Create and activate an virtual environment, and install dependencies.
+```
+python3 -m venv myenv
+source myenv/bin/activate
+pip3 install -r requirements.txt
+```
+
+5. Run `experiment.py` using Python 3
 ```
 python3 experiment.py
+```
+
+6. When done, deactivate virtual environment
+```
+deactivate
 ```
 
 ## Acknowledgement
