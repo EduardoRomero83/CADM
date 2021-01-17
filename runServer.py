@@ -21,6 +21,7 @@ nums = f.readlines()
 f.close()
 
 finalNumBits = str(int(math.floor(math.log(int(nums[0]),2)) + 3))
+port = 7878
 
 cmd = []
 cmd2 = []
@@ -41,6 +42,10 @@ statements.append("Changing number of features per cluster")
 for i in range(int(nCores)):
   cmd.append("cp server/src/inline.cpp server/src/inline" + i + ".cpp")
   statements.append("Copy files")
+  cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + i) + "/' server/src/inline" + i + ".cpp")
+  statements.append("Changing the ports")
+  cmd.append("sed -i 's/^# *define CORE.*/\#define CORE " + str(i) + "/' server/src/inline" + i + ".cpp")
+  statements.append("Assigning core")
   cmd.append("cd server/src/; g++  -o server" + i + ".out -funsafe-loop-optimizations -funroll-all-loops -O3 inline" + i + ".cpp; cd ../../") 
   statements.append("Compile C++ file")
 
