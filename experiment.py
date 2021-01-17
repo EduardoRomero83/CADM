@@ -40,10 +40,10 @@ for n in numTrees:
                 cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, "700000", "0", "y", nCores]
                 p1 = subprocess.Popen(cmd)
                 time.sleep(10)
-                cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700000", "n", treeName, "0", "y"]
+                cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700000", "n", treeName, "0", "y", nCores]
                 time.sleep(60)
                 p2 = subprocess.call(cmd)
-                cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700000", "y", treeName, "1", "y"]
+                cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700000", "y", treeName, "1", "y", nCores]
                 p3 = subprocess.call(cmd)
                 cmd = ["python3", "./ResearchData/process.py", treeName]
                 p1.wait()

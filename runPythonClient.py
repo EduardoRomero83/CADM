@@ -2,8 +2,8 @@ import os
 import sys
 import time
 
-if (len(sys.argv)) != 6:
-    print("This command takes 5 parameters: python runServer.py NumberOfSamples Test?y/n treeName ERGMODE metrics\n")
+if (len(sys.argv)) != 7:
+    print("This command takes 6 parameters: python runServer.py NumberOfSamples Test?y/n treeName ERGMODE metrics nCores\n")
     exit()
 
 numSamples = sys.argv[1]
@@ -12,10 +12,11 @@ treename = sys.argv[3]
 ergmode = sys.argv[4]
 pidfile = "./temps/pid" + ergmode.strip()
 metrics = 'y' in sys.argv[5]
+nCores = srs.argv[6]
 pid = 0
 
 print(pidfile)
-cmd = "python3 server/pythonClient/client.py " + numSamples + ";"
+cmd = "python3 server/pythonClient/client.py " + numSamples + " " + nCores +";"
 print("Run Client")
 
 ready = False
