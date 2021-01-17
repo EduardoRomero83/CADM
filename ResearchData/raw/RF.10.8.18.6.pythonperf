@@ -1,12 +1,12 @@
-# started on Sun Dec 13 21:02:55 2020
+# started on Sun Jan 17 01:44:14 2021
 
-0,,cpu-cycles:u,5227471924,80.29,,
-3878480868,,instructions:u,5870619776,90.17,,
-727576350,,branches:u,5870553391,90.17,,
-10369161,,branch-misses:u,5871270438,90.18,1.43,of all branches
-18394842,,cache-references:u,5871687549,90.19,,
-424067,,cache-misses:u,5864289977,90.07,2.305,of all cache refs
-1122638504,,L1-dcache-loads:u,5851307947,89.88,,
-16836753,,L1-dcache-load-misses:u,5837397606,89.66,1.50,of all L1-dcache hits
-8393020,,LLC-loads:u,5840152043,89.70,,
-261767,,LLC-load-misses:u,5849587317,89.85,3.12,of all LL-cache hits
+0,,cpu-cycles:u,817757605106,80.00,,
+2945316432274,,instructions:u,919979081142,90.00,,
+500393779300,,branches:u,919964476771,90.00,,
+11183718821,,branch-misses:u,919994615886,90.00,2.23,of all branches
+37717566480,,cache-references:u,919965331775,90.00,,
+122396384,,cache-misses:u,919959319460,90.00,0.325,of all cache refs
+893916927899,,L1-dcache-loads:u,919958484123,90.00,,
+21789181774,,L1-dcache-load-misses:u,919977910908,90.00,2.44,of all L1-dcache hits
+15199190566,,LLC-loads:u,919963345928,90.00,,
+26638587,,LLC-load-misses:u,919964606819,90.00,0.18,of all LL-cache hits

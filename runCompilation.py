@@ -2,8 +2,8 @@ import os
 import sys
 
 
-if (len(sys.argv)) != 8:
-    print("This command takes 7 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples ERGMODE performanceMetrics?(y/n) \n")
+if (len(sys.argv)) != 9:
+    print("This command takes 8 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples ERGMODE performanceMetrics?(y/n) numCores \n")
     exit()
 
 numTrees = sys.argv[1]
@@ -13,6 +13,7 @@ maxUnk = sys.argv[4]
 numSamples = sys.argv[5]
 ergmode = sys.argv[6]
 metrics = 'y' in sys.argv[7]
+nCores = sys.argv[8]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
@@ -47,6 +48,8 @@ cmd.append("python3 binfeats/step1.createCommonList.py " + treeName + " > binfea
 statements.append("Common features")
 cmd.append("python3 binfeats/step2.featToBin.py " + treeName + " " + mpc)
 statements.append("Binary features")
+cmd.append("python3 splitFeatures/split.py " + treeName + " " + mpc + " " + nCores)
+statements.append("Parallelize features")
 cmd.append("python3 binadd/step1.makeNaiveOffset.py " + treeName + " " + mpc + " > binadd/tempFiles/" + treeName + ".naiveoffset.txt")
 statements.append("Naive offset")
 cmd.append("cat binadd/tempFiles/" + treeName + ".naiveoffset.txt | wc -l > metadata/" + treeName + ".numpaths.txt")

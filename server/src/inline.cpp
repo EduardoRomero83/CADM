@@ -15,7 +15,7 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 
-#define ERGMODE 0
+#define ERGMODE 1
 
 /*
 ERGMODE 0 - Measure total execution time (print in last line)
