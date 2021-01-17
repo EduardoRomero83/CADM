@@ -43,7 +43,8 @@ ERGMODE 6 - Print hex of response lines for debugging
 #define NUMBYTES 3
 #define NB 11
 #define NUMCLASSES 7
-
+#define PORT 7878
+#define CORE 0
 
 
 static __inline__ unsigned long long get_cycles(void)
@@ -128,13 +129,15 @@ int main(int argc, char* argv[])
   struct timespec start_t, end_t, total_t;
   double ttime=0.0;
   int clusterFeatures=MAXFEAT;
-  int port=7878;//atoi(argv[2]);
+  int port=PORT;//atoi(argv[2]);
 
 
   char featFile[512];
   strcpy(featFile,"./metadata/");
   strcat(featFile,treename);
-  strcat(featFile,".features.bin");
+  strcat(featFile,".features");
+  strcat(featFile,std::to_string(CORE));
+  strcat(featFile,".bin");
 
   fd = open(featFile, O_RDONLY);
   if (fd < 0){
