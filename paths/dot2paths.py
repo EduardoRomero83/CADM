@@ -1,11 +1,11 @@
 import os
 import sys
 
-if (len(sys.argv) != 2):
-    print("This command takes 1 parameters: python test.py treeName\n")
+if (len(sys.argv) != 3):
+    print("This command takes 2 parameters: python test.py treeName numClasses\n")
     exit()
 treeName=sys.argv[1]
-
+numClasses = int(sys.argv[2])
 
 def findPath(i, currPath, nodes, children, parents):
     if (i == 0):
@@ -33,13 +33,10 @@ for tree in directory:
         with open(path + "/dot/" + tree, "r") as f, open(path2 + "/TFpaths/" +treeName+"." + tree + ".path", "w") as out:
             nodes = []
             edges = []
-            #print tree
             f.readline()
             f.readline()
             line1 = f.readline().split("X")[1].split("\\")[0]
             nodes.append(line1)
-            #out.write(line1)
-            #out.write("\n")
             count = 0
             parents = {}
             children = {}
@@ -58,7 +55,7 @@ for tree in directory:
                             response = line.split("=")[4].split("[")[1].split("]")[0]
                             array = []
                             numbers = response.split(",")
-                            for i in range(10):
+                            for i in range(numClasses):
                                 array.append(int(numbers[i]))
                             nodes.append(str(array))
                             pendingLeaf = int(line.split()[0])
@@ -75,7 +72,7 @@ for tree in directory:
                     else:
                         children[parent][1] = child
                     edges.append(edge)
-                    if (pendingLeaf >= 0):    
+                    if (pendingLeaf >= 0): 
                         pathToLeaf = findPath(pendingLeaf, "", nodes, children, parents)
                         out.write(pathToLeaf)
                         out.write("\n")

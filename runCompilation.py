@@ -20,15 +20,17 @@ cmd = []
 statements = []
 
 # No need to retrain
-cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
-statements.append("Train model")
-if metrics:
-    cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1")
-    statements.append("DOT files extraction")
-else:
-    cmd.append("python3 trainOgForest/test.py " + treeName + " 1")
-    statements.append("DOT files extraction")
-cmd.append("python3 paths/dot2paths.py " + treeName)
+#cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
+#statements.append("Train model")
+#if metrics:
+#    cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1")
+#    statements.append("DOT files extraction")
+#else:
+#    cmd.append("python3 trainOgForest/test.py " + treeName + " 1")
+#    statements.append("DOT files extraction")
+
+#6 is specific to dataset, make an argument later
+cmd.append("python3 paths/dot2paths.py " + treeName + " 6 ")
 statements.append("DOT to directories")
 cmd.append("python3 paths/pathdir2txt.py " + treeName)
 statements.append("Path directory to text file")

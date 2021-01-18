@@ -1,0 +1,12 @@
+# started on Sun Jan 17 19:22:34 2021
+
+0,,cpu-cycles:u,854737489490,80.00,,
+2950258123263,,instructions:u,961567694630,90.00,,
+501319330454,,branches:u,961557294333,90.00,,
+11179727703,,branch-misses:u,961547001136,90.00,2.23,of all branches
+37270505647,,cache-references:u,961530267330,90.00,,
+122045986,,cache-misses:u,961544538229,90.00,0.327,of all cache refs
+895294719075,,L1-dcache-loads:u,961533339767,90.00,,
+21927656016,,L1-dcache-load-misses:u,961549356916,90.00,2.45,of all L1-dcache hits
+15124117175,,LLC-loads:u,961536832283,90.00,,
+25068829,,LLC-load-misses:u,961551527412,90.00,0.17,of all LL-cache hits
