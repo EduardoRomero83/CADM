@@ -12,7 +12,7 @@ treename = sys.argv[3]
 ergmode = sys.argv[4]
 pidfile = "./temps/pid" + ergmode.strip()
 metrics = 'y' in sys.argv[5]
-nCores = srs.argv[6]
+nCores = sys.argv[6]
 pid = 0
 
 print(pidfile)
