@@ -20,7 +20,7 @@ cmd = []
 statements = []
 
 # No need to retrain
- cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
+cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
 statements.append("Train model")
 if metrics:
     cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1")
