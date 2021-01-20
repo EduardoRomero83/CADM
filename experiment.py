@@ -36,7 +36,7 @@ for n in numTrees:
                 #time.sleep(10)
                 treeName = "RF." + n + "." + d + "." + m + "." + u
                 print(treeName)
-                cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, "700000", "0", "y"]
+                cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, "700000", "7", "0", "y"]
                 p1 = subprocess.Popen(cmd)
                 time.sleep(10)
                 cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700000", "n", treeName, "0", "y"]
