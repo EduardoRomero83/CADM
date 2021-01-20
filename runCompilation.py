@@ -2,8 +2,8 @@ import os
 import sys
 
 
-if (len(sys.argv)) != 8:
-    print("This command takes 7 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples ERGMODE performanceMetrics?(y/n) \n")
+if (len(sys.argv)) != 9:
+    print("This command takes 8 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples numClasses ERGMODE performanceMetrics?(y/n) \n")
     exit()
 
 numTrees = sys.argv[1]
@@ -11,15 +11,16 @@ maxDepth = sys.argv[2]
 mpc = sys.argv[3]
 maxUnk = sys.argv[4]
 numSamples = sys.argv[5]
-ergmode = sys.argv[6]
-metrics = 'y' in sys.argv[7]
+numClasses = sys.argv[6]
+ergmode = sys.argv[7]
+metrics = 'y' in sys.argv[8]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
 statements = []
 
 # No need to retrain
-cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
+ cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
 statements.append("Train model")
 if metrics:
     cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1")
@@ -27,7 +28,7 @@ if metrics:
 else:
     cmd.append("python3 trainOgForest/test.py " + treeName + " 1")
     statements.append("DOT files extraction")
-cmd.append("python3 paths/dot2paths.py " + treeName)
+cmd.append("python3 paths/dot2paths.py " + treeName + " " + numClasses)
 statements.append("DOT to directories")
 cmd.append("python3 paths/pathdir2txt.py " + treeName)
 statements.append("Path directory to text file")
@@ -59,7 +60,7 @@ cmd.append("python3 binadd/step3.markconflicts.py " + treeName + " > binadd/temp
 statements.append("Mark Conflicts")
 cmd.append("python3 binadd/step4.combineconflicts.py " + treeName + " > ./binadd/tempFiles/" + treeName + ".firsthash.combinedconflicts.txt")
 statements.append("Combine conflicts")
-cmd.append("python3 binadd/step5.secondhash.py " + treeName + " > binadd/tempFiles/" + treeName + ".secondhash.txt")
+cmd.append("python3 binadd/step5.secondhash.py " + treeName + " " + numClasses + " > binadd/tempFiles/" + treeName + ".secondhash.txt")
 statements.append("Second hash")
 cmd.append("sort -k 2 binadd/tempFiles/" + treeName + ".secondhash.txt > binadd/tempFiles/" + treeName + ".secondhash.sorted.txt")
 statements.append("Sort")
