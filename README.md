@@ -26,9 +26,10 @@ pip3 install -r requirements.txt
 python3 experiment.py
 ```
 
-6. When done, deactivate virtual environment
+6. When done, deactivate virtual environment and check `ResearchData/combined.csv` for results (for example using `cat`)
 ```
 deactivate
+cat ResearchData/combined.csv | column -t -s, | less -S
 ```
 
 ## Acknowledgement

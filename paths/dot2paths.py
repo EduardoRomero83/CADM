@@ -5,7 +5,7 @@ if (len(sys.argv) != 3):
     print("This command takes 2 parameters: python test.py treeName numClasses\n")
     exit()
 treeName=sys.argv[1]
-numClasses = int(sys.argv[2])
+numClasses=int(sys.argv[2])
 
 def findPath(i, currPath, nodes, children, parents):
     if (i == 0):

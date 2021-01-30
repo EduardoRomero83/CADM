@@ -1,4 +1,6 @@
 trainOgForest/SplitData.pkl
-trainOgForest/dot/
-paths/TFpaths/
-
+trainOgForest/dot/*
+paths/TFpaths/*
+temps/pid*
+server/src/*.out
+server/testaccuracy/temp

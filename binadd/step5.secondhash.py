@@ -1,10 +1,11 @@
 import math
 import sys
 
-if (len(sys.argv) != 2):
-    print("This command takes 1 parameter: python step5.secondhash.py treeName\n")
+if (len(sys.argv) != 3):
+    print("This command takes 2 parameter: python step5.secondhash.py treeName numClasses\n")
     exit()
 treeName=sys.argv[1]
+numClasses=int(sys.argv[2])
 
 infile = "./binadd/tempFiles/" + treeName + ".firsthash.combinedconflicts.txt"
 
@@ -48,11 +49,11 @@ def dohashPlanB(addr, cID, adSet, adSize, n1, n2):
 
 
 def createRes(n1, n2):
-    toRet = str(n1) + "," + str(n2) + ",0,0,0,0,0,0,0,0 "
+    toRet = str(n1) + "," + str(n2) + ",0"*(numClasses-2)
     return toRet
 
 def createResB(n1, n2):
-    toRet = str(n1) + ",0," + str(n2) + ",0,0,0,0,0,0,0 "
+    toRet = str(n1) + ",0," + str(n2) + ",0"*(numClasses-1)
     return toRet
 
 
@@ -70,7 +71,7 @@ def combineResps(r1, r2):
     return toRet + str(l3[-1])
 
 def combineListofResps(resplist):
-    curresp = "0,0,0,0,0,0,0" # number of 0s = number of classifications
+    curresp = "0" + ",0"*(numClasses-1) # number of 0s = number of classifications
     for resp in resplist:
         curresp = combineResps(curresp, resp)
     return curresp
