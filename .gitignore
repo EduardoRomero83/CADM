@@ -4,3 +4,6 @@ paths/TFpaths/*
 temps/pid*
 server/src/*.out
 server/testaccuracy/temp
+myenv/*
+trainOgForest/__pycache__/*
+*.out
