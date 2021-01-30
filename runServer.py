@@ -52,14 +52,14 @@ for i in range(int(nCores)):
   if metrics:
       if ergmode == '0':
           #c = ["./server/src/server" + i + ".out", treeName, ">>", "./ResearchData/raw/" + treeName + ".time.txt", "&", "echo"]
-          cmd2.append("./server/src/server" + i + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".time.txt & echo $! > ./temps/pid" + ergmode)
+          cmd2.append("./server/src/server" + str(i) + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".time.txt & echo $! > ./temps/pid" + ergmode)
       else:
-          cmd2.append("./server/src/server" + i + ".out " + treeName + " > server/testaccuracy/temp & echo $! > ./temps/pid" + ergmode)
+          cmd2.append("./server/src/server" + str(i) + ".out " + treeName + " > server/testaccuracy/temp & echo $! > ./temps/pid" + ergmode)
       cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
       statements.append("Run server")
 
   else:
-      cmd2.append("./server/src/server" + i + ".out " +  treeName + " > server/testaccuracy/temp" + i)
+      cmd2.append("./server/src/server" + str(i) + ".out " +  treeName + " > server/testaccuracy/temp" + str(i))
       statements.append("Run server")
 
 i = 0
