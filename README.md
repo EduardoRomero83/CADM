@@ -1,6 +1,6 @@
 # CADM
 
-## How to use
+## Thank you for accessing this repository.  How to use
 
 1. Clone the repo and navigate inside it.
 ```
