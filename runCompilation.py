@@ -75,7 +75,7 @@ statements.append("Count bits")
 cmd.append("python3 binadd/step8.tobinary.py " + treeName)
 statements.append("Binary addresses")
 if metrics:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplit + ";")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + ";")
     statements.append("Compile and run the server")
     #cmd.append("sleep 80")
     #statements.append("Sleeping between runs")
