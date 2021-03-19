@@ -1,47 +1,118 @@
+RF.10.8.18.6.0.core0.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core1.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core2.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core3.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core4.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core5.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core6.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
+RF.10.8.18.6.0.core7.serverperf
+# started on Fri Mar 19 19:46:56 2021
+
 RF.10.8.18.6.0.serverperf
-# started on Thu May 21 19:06:26 2020
+# started on Sun Jan 17 02:02:31 2021
 
-0,,cpu-cycles:u,6111832904,80.09,,
-27574705379,,instructions:u,6862984730,89.93,,
-1922527991,,branches:u,6874085750,90.08,,
-87066302,,branch-misses:u,6867366843,89.99,4.53,of all branches
-3870425,,cache-references:u,6864273834,89.95,,
-32487,,cache-misses:u,6863930449,89.95,0.839,of all cache refs
-4253851344,,L1-dcache-loads:u,6868604090,90.01,,
-76497075,,L1-dcache-load-misses:u,6861918557,89.92,1.80,of all L1-dcache hits
-1156792,,LLC-loads:u,6869743537,90.02,,
-4931,,LLC-load-misses:u,6867145012,89.99,0.43,of all LL-cache hits
+0,,cpu-cycles:u,6972549644,79.96,,
+27398474930,,instructions:u,7851361744,90.03,,
+1912707241,,branches:u,7851944962,90.04,,
+85357830,,branch-misses:u,7866772461,90.21,4.46,of all branches
+4552137,,cache-references:u,7853966583,90.06,,
+12810,,cache-misses:u,7851389071,90.03,0.281,of all cache refs
+4237329888,,L1-dcache-loads:u,7836073377,89.86,,
+74673992,,L1-dcache-load-misses:u,7846630820,89.98,1.76,of all L1-dcache hits
+1553009,,LLC-loads:u,7839117669,89.89,,
+2161,,LLC-load-misses:u,7846054757,89.97,0.14,of all LL-cache hits
 RF.10.8.18.6.1.serverperf
-# started on Thu May 21 19:08:23 2020
-
-0,,cpu-cycles:u,7464398586,80.22,,
-30559205125,,instructions:u,8384759438,90.11,,
-2420838885,,branches:u,8366973286,89.92,,
-95325326,,branch-misses:u,8369427737,89.94,3.94,of all branches
-4542754,,cache-references:u,8376616829,90.02,,
-16407,,cache-misses:u,8371509803,89.97,0.361,of all cache refs
-5030017057,,L1-dcache-loads:u,8368218179,89.93,,
-136192516,,L1-dcache-load-misses:u,8369171319,89.94,2.71,of all L1-dcache hits
-1957623,,LLC-loads:u,8378552421,90.04,,
-7773,,LLC-load-misses:u,8375652912,90.01,0.40,of all LL-cache hits
 RF.10.8.18.6.acc.python.txt
-Accuracy: 0.580649184104
-4.7523829937
+Accuracy: 0.5830128571428571
+1045.5523874759674
 RF.10.8.18.6.acc.server.txt
 Server Accuracy: 0.519482857143
+RF.10.8.18.6.dicSplit0.time.txt
+Total: 0.000598
+a: 0 
+Total: 0.000596
+a: 0 
+Total: 0.000589
+a: 0 
+RF.10.8.18.6.dicSplit1.time.txt
+Total: 0.000438
+a: 0 
+Total: 0.000443
+a: 0 
+Total: 0.000439
+a: 0 
+RF.10.8.18.6.dicSplit2.time.txt
+Total: 0.000438
+a: 0 
+Total: 0.000439
+a: 0 
+Total: 0.000438
+a: 0 
+RF.10.8.18.6.dicSplit3.time.txt
+Total: 0.000560
+a: 0 
+Total: 0.000568
+a: 0 
+Total: 0.000564
+a: 0 
+RF.10.8.18.6.dicSplit4.time.txt
+Total: 0.000592
+a: 0 
+Total: 0.000587
+a: 0 
+Total: 0.000600
+a: 0 
+RF.10.8.18.6.dicSplit5.time.txt
+Total: 0.000491
+a: 0 
+Total: 0.000493
+a: 0 
+Total: 0.000499
+a: 0 
+RF.10.8.18.6.dicSplit6.time.txt
+Total: 0.000603
+a: 0 
+Total: 0.000603
+a: 0 
+Total: 0.000616
+a: 0 
+RF.10.8.18.6.dicSplit7.time.txt
+Total: 0.000557
+a: 0 
+Total: 0.000559
+a: 0 
+Total: 0.000554
+a: 0 
 RF.10.8.18.6.pythonperf
-# started on Thu May 21 19:05:01 2020
+# started on Sun Jan 17 19:22:34 2021
 
-0,,cpu-cycles:u,22026709212,79.95,,
-69015722819,,instructions:u,24787797399,89.98,,
-10729169531,,branches:u,24803048370,90.03,,
-116441250,,branch-misses:u,24797097709,90.01,1.09,of all branches
-253197329,,cache-references:u,24784647145,89.96,,
-124269039,,cache-misses:u,24789595632,89.98,49.080,of all cache refs
-20678796840,,L1-dcache-loads:u,24805724196,90.04,,
-223240305,,L1-dcache-load-misses:u,24805257224,90.04,1.08,of all L1-dcache hits
-58282478,,LLC-loads:u,24793938153,90.00,,
-24464072,,LLC-load-misses:u,24788144999,89.98,41.98,of all LL-cache hits
+0,,cpu-cycles:u,854737489490,80.00,,
+2950258123263,,instructions:u,961567694630,90.00,,
+501319330454,,branches:u,961557294333,90.00,,
+11179727703,,branch-misses:u,961547001136,90.00,2.23,of all branches
+37270505647,,cache-references:u,961530267330,90.00,,
+122045986,,cache-misses:u,961544538229,90.00,0.327,of all cache refs
+895294719075,,L1-dcache-loads:u,961533339767,90.00,,
+21927656016,,L1-dcache-load-misses:u,961549356916,90.00,2.45,of all L1-dcache hits
+15124117175,,LLC-loads:u,961536832283,90.00,,
+25068829,,LLC-load-misses:u,961551527412,90.00,0.17,of all LL-cache hits
 RF.10.8.18.6.time.txt
 Total: 4.359190
+a: 0 
+memblock failed for results
+Total: 4.350131
 a: 0 
