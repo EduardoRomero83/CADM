@@ -22,3 +22,4 @@ ResearchData/combined.csv
 roothpath.clustering/tempFiles/*
 roothpath.clustering/clusteclusteredOutputs/*
 trainOgForest/__pycache__/*
+binadd/tempFiles/*
