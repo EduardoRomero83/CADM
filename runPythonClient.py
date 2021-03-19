@@ -3,7 +3,7 @@ import sys
 import time
 
 if (len(sys.argv)) != 7:
-    print("This command takes 6 parameters: python runServer.py NumberOfSamples Test?y/n treeName ERGMODE metrics nCores\n")
+    print("This command takes 6 parameters: python runServer.py NumberOfSamples Test?y/n treeName ERGMODE metrics dicSplits\n")
     exit()
 
 numSamples = sys.argv[1]
@@ -12,11 +12,11 @@ treename = sys.argv[3]
 ergmode = sys.argv[4]
 pidfile = "./temps/pid" + ergmode.strip()
 metrics = 'y' in sys.argv[5]
-nCores = sys.argv[6]
+dicSplits = sys.argv[6]
 pid = 0
 
 print(pidfile)
-cmd = "python3 server/pythonClient/client.py " + numSamples + " " + nCores +";"
+cmd = "python3 server/pythonClient/client.py " + numSamples + " " + dicSplits +";"
 print("Run Client")
 
 ready = False
@@ -37,7 +37,7 @@ print("Found PID")
 #    time.sleep(2)
 
 os.system(cmd)
-time.sleep(120)
+time.sleep(30)
 
 if test:
     cmd = "python3 server/testaccuracy/ta.py " + numSamples + " >> ./ResearchData/raw/" + treename + ".acc.server.txt"

@@ -9,7 +9,7 @@ mpc = int(sys.argv[2])
 nCores = int(sys.argv[3])
 
 def getCurrentFile(currCore):
-  s = "./metadata/" + treeName + ".features" + str(currCore) + ".bin"
+  s = "./metadata/" + treeName + ".addresses" + str(currCore) + ".bin"
   return s
 
 

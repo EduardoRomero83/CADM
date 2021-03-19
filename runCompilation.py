@@ -14,7 +14,7 @@ numSamples = sys.argv[5]
 numClasses = sys.argv[6]
 ergmode = sys.argv[7]
 metrics = 'y' in sys.argv[8]
-nCores = sys.argv[9]
+dicSplits = sys.argv[9]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
@@ -50,7 +50,7 @@ cmd.append("python3 binfeats/step1.createCommonList.py " + treeName + " > binfea
 statements.append("Common features")
 cmd.append("python3 binfeats/step2.featToBin.py " + treeName + " " + mpc)
 statements.append("Binary features")
-cmd.append("python3 splitFeatures/split.py " + treeName + " " + mpc + " " + nCores)
+cmd.append("python3 splitFeatures/split.py " + treeName + " " + mpc + " " + dicSplits)
 statements.append("Parallelize features")
 cmd.append("python3 binadd/step1.makeNaiveOffset.py " + treeName + " " + mpc + " > binadd/tempFiles/" + treeName + ".naiveoffset.txt")
 statements.append("Naive offset")
@@ -75,14 +75,14 @@ statements.append("Count bits")
 cmd.append("python3 binadd/step8.tobinary.py " + treeName)
 statements.append("Binary addresses")
 if metrics:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " 0 y;")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplit + ";")
     statements.append("Compile and run the server")
-    cmd.append("sleep 80")
-    statements.append("Sleeping between runs")
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " 1 y;")
-    statements.append("Compile and run the server")
+    #cmd.append("sleep 80")
+    #statements.append("Sleeping between runs")
+    #cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " 1 y " + dicSplits + ";")
+    #statements.append("Compile and run the server")
 else:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " n")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " n " + dicSplits + ";")
     statements.append("Compile and run the server")
 #
 i = 0

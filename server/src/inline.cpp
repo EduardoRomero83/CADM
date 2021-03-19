@@ -15,7 +15,7 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 
-#define ERGMODE 1
+#define ERGMODE 0
 
 /*
 ERGMODE 0 - Measure total execution time (print in last line)
@@ -30,8 +30,7 @@ ERGMODE 6 - Print hex of response lines for debugging
 
 #define MAXMSG  20000
 
-#define SAMPLES 700000
-#define CORES 1
+#define SAMPLES 700
 /* These two number need to come from argv.
 * MAXFEAT should come directly from argv
 * NUMBITS should be read from metadata.
@@ -44,7 +43,8 @@ ERGMODE 6 - Print hex of response lines for debugging
 #define NB 11
 #define NUMCLASSES 7
 #define PORT 7878
-#define CORE 0
+#define DICSPLIT 0
+#define CLUSTEROFFSET 0
 
 
 static __inline__ unsigned long long get_cycles(void)
@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
 
   char treename[128];
   strcpy(treename,argv[1]);
-
+  unsigned int cOffset = CLUSTEROFFSET;
 
   int sockfd, new_socket,fd;//connfd, fd, len;
   struct sockaddr_in servaddr, cli;
@@ -136,7 +136,10 @@ int main(int argc, char* argv[])
   strcpy(featFile,"./metadata/");
   strcat(featFile,treename);
   strcat(featFile,".features");
-  strcat(featFile,std::to_string(CORE));
+  char coreString[2];
+  sprintf(coreString, "%d", DICSPLIT);
+  //featFile = featFile + coreString;
+  strcat(featFile,coreString);
   strcat(featFile,".bin");
 
   fd = open(featFile, O_RDONLY);
@@ -203,6 +206,7 @@ int main(int argc, char* argv[])
     perror("socket failed");
     exit(EXIT_FAILURE);
   }
+
   if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
     perror("setsockopt");
     exit(EXIT_FAILURE);
@@ -300,28 +304,6 @@ int main(int argc, char* argv[])
   #endif
 
   int start=0;
-  int dist = (int)SAMPLES/CORES;
-  pid_t  pid[CORES];
-
-  // SPawning processes was a bad idea.  Whose idea was it?
-  /*for (int i = 1; i < CORES; i++) {
-  pid[i] = fork();
-  start=start+dist+1;
-  if (pid[i] < 0) { // error occurred
-  fprintf(stderr, "Fork %d failed!\n",i);
-  exit(-1);
-}
-else if (pid[i] == 0) { // child process
-i = CORES;
-break;
-}
-else { // parent process
-if ( (i+1) == CORES) {
-start=0;
-pid[0] = -1;
-}
-}
-}*/
 int real_start = 0; //((start)*784);
 int real_stop = TEST_SIZE;//(start+dist)*784;
 unsigned int finalResps[NUMCLASSES] = {0,0,0,0,0,0,0};
@@ -483,11 +465,11 @@ printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, cluster
 
   // CHristopher Stewart -- This looks like deadcode
   shiftSize= (clusterFeatures -ftc);
-  unsigned int base = 373+373 * (i);
+  unsigned int base = 373+373 * (i + cOffset);
   unsigned int ending = base % (1 << (clusterFeatures - ftc +1 )); //pow2[shiftSize]; //
   lookup = lookup | ending;
 
-  hash(lookup, i, 2, 23);
+  hash(lookup, i + cOffset, 2, 23);
   bool conf = false;
   conf = responses[lookup].rs[0] >> 7;
   signature = responses[lookup].signature;
@@ -629,17 +611,6 @@ printf("Lookups: %d \n", uselessCount);
 
 }
 
-/*
-if ((pid[0] == -1) || (CORES == 1)) {
-for (int i = 1; i < CORES; i++) {
-int status=0;
-int pid = wait(&status);
-}
-}
-else {
-exit(0);
-}
-*/
 
 #if ERGMODE == 0
 clock_gettime(CLOCK_MONOTONIC,&end_t);
@@ -855,16 +826,3 @@ inline void handleFailedHash(unsigned int & sequence, int cID, unsigned int prim
   sequence = ( (unsigned int) ((sequence + k + cID) * prime)) % (1 << NUMBITS);
 }
 
-/*unsigned int naiveoffset(unsigned int  sample, feature ft[], int cID) {
-unsigned int base = (373* (cID+1));
-for (int i = 0; i < 20; i++) {
-if ((ft[i].feat == 0) && (ft[i].val == 0)) {
-int shiftSize = 20 -  i;
-//sample = (sample >> shiftSize) << shiftSize;
-unsigned int ending = base % pow2[shiftSize]; //(1 << shiftSize);
-//sample = sample | ending;
-//break;
-return( sample | ending);
-}
-}
-}*/
