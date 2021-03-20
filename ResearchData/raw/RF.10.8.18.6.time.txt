@@ -1,5 +1,0 @@
-Total: 4.359190
-a: 0 
-memblock failed for results
-Total: 4.350131
-a: 0 
