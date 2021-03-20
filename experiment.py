@@ -12,6 +12,7 @@ maxUnk = ["6"]
 #mpc = ["20"]
 #maxUnk = ["4"]
 dicSplits = "8"
+tableSplits = "1"
 
 if os.path.exists('./trainOgForest/SplitData.pkl'):
     print('SplitData.pkl exists; proceeding with experiment')
