@@ -14,7 +14,7 @@ def getCurrentFile(currCore):
 
 
 """
-Copy of server structure + reasoning why divide clusters the following way:
+OLD: Copy of server structure + reasoning why divide clusters the following way:
 struct cluster
 {
   //char ftcount;
