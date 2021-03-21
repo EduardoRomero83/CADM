@@ -4,6 +4,7 @@ paths/TFpaths/*
 temps/*
 server/src/*.out
 server/testaccuracy/temp*
+server/src/inline[0-9].[0-9].cpp
 server/src/inline[0-9].cpp
 Research/raw/*
 myenv/*

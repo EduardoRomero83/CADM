@@ -78,14 +78,14 @@ statements.append("Binary addresses")
 cmd.append("python3 splitAddr/split.py " + treeName + " " + mpc + " " + tableSplits)
 statements.append("Parallelize addresses")
 if metrics:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + ";")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + " " + tableSplits + ";")
     statements.append("Compile and run the server")
     #cmd.append("sleep 80")
     #statements.append("Sleeping between runs")
     #cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " 1 y " + dicSplits + ";")
     #statements.append("Compile and run the server")
 else:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " n " + dicSplits + ";")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " n " + dicSplits + " " + tableSplits + ";")
     statements.append("Compile and run the server")
 #
 i = 0
