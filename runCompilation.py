@@ -2,8 +2,8 @@ import os
 import sys
 
 
-if (len(sys.argv)) != 10:
-    print("This command takes 8 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples numClasses ERGMODE performanceMetrics?(y/n) numCores\n")
+if (len(sys.argv)) != 11:
+    print("This command takes 10 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples numClasses ERGMODE performanceMetrics?(y/n) dicSplits tableSplits\n")
     exit()
 
 numTrees = sys.argv[1]
@@ -15,6 +15,7 @@ numClasses = sys.argv[6]
 ergmode = sys.argv[7]
 metrics = 'y' in sys.argv[8]
 dicSplits = sys.argv[9]
+tableSplits = sys.argv[10]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
@@ -74,6 +75,8 @@ cmd.append("python3 binadd/step7.neededbits.py " + treeName + " > metadata/" + t
 statements.append("Count bits")
 cmd.append("python3 binadd/step8.tobinary.py " + treeName)
 statements.append("Binary addresses")
+cmd.append("python3 splitAddr/split.py " + treeName + " " + mpc + " " + tableSplits)
+statements.append("Parallelize addresses")
 if metrics:
     cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + ";")
     statements.append("Compile and run the server")

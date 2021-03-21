@@ -28,7 +28,8 @@ while (i < int(sys.argv[1]) ):
     img = infile.read(11) #11 features, 1 byte each
     for j in range(dicSplits): 
         sArr[j].send(img)
-    print(i)
+    if i % 500 == 0:
+      print(i)
     i=i+1
 infile.close()
 for j in range(dicSplits):

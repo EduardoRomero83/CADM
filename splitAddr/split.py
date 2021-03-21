@@ -1,4 +1,5 @@
 from bitarray import bitarray
+import math
 import sys
 
 if (len(sys.argv) != 4):
@@ -14,30 +15,28 @@ def getCurrentFile(currCore):
 
 
 """
-OLD: Copy of server structure + reasoning why divide clusters the following way:
-struct cluster
-{
-  //char ftcount;
-  unsigned int signature;
-  feature ft[MAXFEAT];
-  unsigned int important;
-  unsigned int common;
-};
+Num paths will give us number of total addresses in binary file. 
++ 3 because it avoids hash conflicts (and it is done like this elsewhere)
 """
+pathSizeFile = "./metadata/" + treeName + ".numpaths.txt"
+f = open(pathSizeFile)
+nums = f.readlines()
+f.close()
 
-bytesPerCluster = 4 * mpc + 12
-ogfile = open("./metadata/" + treeName + ".features.bin", "rb")
-clusters = ogfile.read()
+finalNumBits = int(math.floor(math.log(int(nums[0]),2)) + 3)
+
+ogfile = open("./metadata/" + treeName + ".addresses.bin", "rb")
+paths = ogfile.read()
 ogfile.close()
 
-numClusters = len(clusters) // bytesPerCluster
-clustersPerCore = numClusters // nCores
+numPaths = len(paths) // finalNumBits
+pathsPerCore = numPaths // nCores
 
 currentCore = 0
 
-ogfile = open("./metadata/" + treeName + ".features.bin", "rb")
+ogfile = open("./metadata/" + treeName + ".addresses.bin", "rb")
 for i in range(nCores-1):
-    piece = ogfile.read(clustersPerCore * bytesPerCluster)  
+    piece = ogfile.read(pathsPerCore * finalNumBits)  
     if not piece:
         break
     newFile = open(getCurrentFile(i), "wb")
@@ -49,7 +48,7 @@ newFile.write(piece)
 newFile.close()
 ogfile.close()
 
-outfile = open("./metadata/" + treeName + ".numClustersPerFile.txt", "w")
-outfile.write(str(numClusters))
+outfile = open("./metadata/" + treeName + ".numPathsPerFile.txt", "w")
+outfile.write(str(numPaths))
 outfile.close()
 

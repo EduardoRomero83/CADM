@@ -12,7 +12,7 @@ maxUnk = ["6"]
 #mpc = ["20"]
 #maxUnk = ["4"]
 dicSplits = "8"
-tableSplits = "1"
+tableSplits = "4"
 
 if os.path.exists('./trainOgForest/SplitData.pkl'):
     print('SplitData.pkl exists; proceeding with experiment')
@@ -38,7 +38,7 @@ for n in numTrees:
                 #time.sleep(10)
                 treeName = "RF." + n + "." + d + "." + m + "." + u
                 print(treeName)
-                cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, "700", "7", "0", "y", dicSplits]
+                cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, "700", "7", "0", "y", dicSplits, tableSplits]
                 p1 = subprocess.Popen(cmd)
                 time.sleep(10)
                 cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700", "n", treeName, "0", "y", dicSplits]
