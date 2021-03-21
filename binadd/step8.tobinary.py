@@ -137,7 +137,7 @@ for line in lines:
     #if i > 1:
 #       break
 
-missedLines = (2**(finalNumBits) - printedLines)
+missedLines = (2**(finalNumBits) - printedLines + 1)
 if (missedLines > 0):
     fillup(missedLines)
 
