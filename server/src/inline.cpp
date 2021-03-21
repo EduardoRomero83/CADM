@@ -44,7 +44,10 @@ ERGMODE 6 - Print hex of response lines for debugging
 #define NUMCLASSES 7
 #define PORT 7878
 #define DICSPLIT 0
+#define TABLESPLIT 0
 #define CLUSTEROFFSET 0
+#define TABLEOFFSET 0
+#define TABLEUPPERLIMIT 16384
 
 
 static __inline__ unsigned long long get_cycles(void)
@@ -120,6 +123,9 @@ int main(int argc, char* argv[])
   char treename[128];
   strcpy(treename,argv[1]);
   unsigned int cOffset = CLUSTEROFFSET;
+  unsigned int tOffset = TABLEOFFSET;
+  unsigned int tabUpper = TABLEUPPERLIMIT;
+  tabUpper = tabUpper + tOffset;
 
   int sockfd, new_socket,fd;//connfd, fd, len;
   struct sockaddr_in servaddr, cli;
@@ -136,10 +142,9 @@ int main(int argc, char* argv[])
   strcpy(featFile,"./metadata/");
   strcat(featFile,treename);
   strcat(featFile,".features");
-  char coreString[2];
-  sprintf(coreString, "%d", DICSPLIT);
-  //featFile = featFile + coreString;
-  strcat(featFile,coreString);
+  char dicString[2];
+  sprintf(dicString, "%d", DICSPLIT);//featFile = featFile + coreString;
+  strcat(featFile,dicString);
   strcat(featFile,".bin");
 
   fd = open(featFile, O_RDONLY);
@@ -169,7 +174,11 @@ int main(int argc, char* argv[])
   char addFile[512];
   strcpy(addFile,"./metadata/");
   strcat(addFile,treename);
-  strcat(addFile, ".addresses.bin");
+  strcat(addFile, ".addresses");
+  char tabString[2];
+  sprintf(tabString, "%d", TABLESPLIT);//addrFile = addrFile + coreString;
+  strcat(addFile,tabString);
+  strcat(addFile,".bin");
 
   fd = open(addFile, O_RDONLY);
   if (fd < 0){
@@ -471,6 +480,10 @@ printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, cluster
 
   hash(lookup, i + cOffset, 2, 23);
   bool conf = false;
+  if ((lookup > tOffset) || lookup >= tabUpper) {
+    continue;
+  }
+  lookup -= tOffset;
   conf = responses[lookup].rs[0] >> 7;
   signature = responses[lookup].signature;
   //#if ERGMODE == 5
@@ -491,6 +504,7 @@ printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, cluster
   } // if sig matches
   // First lookup has conflict. Handle it and check if there is a new conflict.
   else if ((conf == true)  ) {
+    continue; //Conflict matching turned off
     // Christopher Stewart - November 2019
     // The code below replicates the code above but gets only 2 array elements
     // Needed for Eduardo's Handle Conflict functions
