@@ -30,7 +30,7 @@ ERGMODE 6 - Print hex of response lines for debugging
 
 #define MAXMSG  20000
 
-#define SAMPLES 700
+#define SAMPLES 7000
 /* These two number need to come from argv.
 * MAXFEAT should come directly from argv
 * NUMBITS should be read from metadata.

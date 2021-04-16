@@ -27,6 +27,11 @@ f = open(numClusterFile)
 numClustersPerFile = int(f.readlines()[0])
 f.close()
 
+numPathFile = "./metadata/" + treeName + ".numPathsPerFile.txt"
+f = open(numPathFile)
+numPathsPerFile = int(f.readlines()[0])
+f.close()
+
 finalNumBits = str(int(math.floor(math.log(int(nums[0]),2)) + 3))
 port = 7878
 
@@ -56,8 +61,18 @@ for i in range(int(dicSplits)):
     statements.append("Changing the ports")
     cmd.append("sed -i 's/^# *define DICSPLIT.*/\#define DICSPLIT " + str(i) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
     statements.append("Assigning dictionary partition")
+    cmd.append("sed -i 's/^# *define TABLESPLIT.*/\#define TABLESPLIT " + str(j) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
+    statements.append("Assigning table partition")
     cmd.append("sed -i 's/^# *define CLUSTEROFFSET.*/\#define CLUSTEROFFSET " + str(i * numClustersPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Fixing offset")
+    statements.append("Fixing dic offset")
+    cmd.append("sed -i 's/^# *define TABLEOFFSET.*/\#define TABLEOFFSET " + str(j * numPathsPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
+    statements.append("Fixing table offset")
+    if j == int(tabSplits) -1:
+        cmd.append("sed -i 's/^# *define TABLEUPPERLIMIT.*/\#define TABLEUPPERLIMIT " + str((j + 2) * numPathsPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
+        statements.append("Fixing table upper bound")
+    else:
+        cmd.append("sed -i 's/^# *define TABLEUPPERLIMIT.*/\#define TABLEUPPERLIMIT " + str((j + 1) * numPathsPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
+        statements.append("Fixing table upper bound")
     cmd.append("cd server/src/; g++  -o server" + str(i) + "." + str(j) + ".out -funsafe-loop-optimizations -funroll-all-loops -O3 inline" + str(i) + "." + str(j) + ".cpp; cd ../../") 
     statements.append("Compile C++ file")
 
