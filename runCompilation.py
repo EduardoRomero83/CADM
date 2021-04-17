@@ -2,8 +2,8 @@ import os
 import sys
 
 
-if (len(sys.argv)) != 11:
-    print("This command takes 10 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples numClasses ERGMODE performanceMetrics?(y/n) dicSplits tableSplits\n")
+if (len(sys.argv)) != 12:
+    print("This command takes 11 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples numClasses ERGMODE performanceMetrics?(y/n) dicSplits tableSplits dataset\n")
     exit()
 
 numTrees = sys.argv[1]
@@ -16,21 +16,20 @@ ergmode = sys.argv[7]
 metrics = 'y' in sys.argv[8]
 dicSplits = sys.argv[9]
 tableSplits = sys.argv[10]
+dataset = sys.argv[11]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
 statements = []
 
-# No need to retrain
-"""cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth)
+cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth + " " + dataset)
 statements.append("Train model")
 if metrics:
-    cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1")
+    cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1 " + dataset)
     statements.append("DOT files extraction")
 else:
-    cmd.append("python3 trainOgForest/test.py " + treeName + " 1")
+    cmd.append("python3 trainOgForest/test.py " + treeName + " 1 " + dataset)
     statements.append("DOT files extraction")
-"""
 cmd.append("python3 paths/dot2paths.py " + treeName + " " + numClasses)
 statements.append("DOT to directories")
 cmd.append("python3 paths/pathdir2txt.py " + treeName)
@@ -78,14 +77,14 @@ statements.append("Binary addresses")
 cmd.append("python3 splitAddr/split.py " + treeName + " " + mpc + " " + tableSplits)
 statements.append("Parallelize addresses")
 if metrics:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + " " + tableSplits + ";")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + " " + tableSplits + " " + dataset + ";")
     statements.append("Compile and run the server")
     #cmd.append("sleep 80")
     #statements.append("Sleeping between runs")
     #cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " 1 y " + dicSplits + ";")
     #statements.append("Compile and run the server")
 else:
-    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " n " + dicSplits + " " + tableSplits + ";")
+    cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " n " + dicSplits + " " + tableSplits + " " + dataset + ";")
     statements.append("Compile and run the server")
 #
 i = 0

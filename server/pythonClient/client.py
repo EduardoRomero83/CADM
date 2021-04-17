@@ -9,6 +9,11 @@ import pickle
 predicted = []
 times = []
 
+dataset = sys.argv[3]
+if dataset == "mnist":
+    readSize = 28*28
+else:
+    readSize = 11 #11 features, 1 byte each
 
 cores = int(sys.argv[2])
 count = 1
@@ -22,10 +27,13 @@ for i in range(cores):
   sArr.append(s)
 
 i = 0
-infile = open("server/pythonClient/traffic.dump","rb")
+if dataset == "mnist":
+    infile = open("server/pythonClient/mnist.dump","rb")
+else:
+    infile = open("server/pythonClient/traffic.dump","rb")
 print("Sending from client")
 while (i < int(sys.argv[1]) ):
-    img = infile.read(11) #11 features, 1 byte each
+    img = infile.read(readSize)
     for j in range(cores): 
         sArr[j].send(img)
     if i % 500 == 0:

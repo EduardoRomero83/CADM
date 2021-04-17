@@ -30,7 +30,7 @@ ERGMODE 6 - Print hex of response lines for debugging
 
 #define MAXMSG  20000
 
-#define SAMPLES 7000
+#define SAMPLES 10000
 /* These two number need to come from argv.
 * MAXFEAT should come directly from argv
 * NUMBITS should be read from metadata.
@@ -38,10 +38,10 @@ ERGMODE 6 - Print hex of response lines for debugging
 * See definition of resultline for next change
 */
 #define MAXFEAT 18
-#define NUMBITS 16
+#define NUMBITS 17
 #define NUMBYTES 3
-#define NB 11
-#define NUMCLASSES 7
+#define NB 784
+#define NUMCLASSES 10
 #define PORT 7878
 #define DICSPLIT 0
 #define TABLESPLIT 0
@@ -315,7 +315,7 @@ int main(int argc, char* argv[])
   int start=0;
 int real_start = 0; //((start)*784);
 int real_stop = TEST_SIZE;//(start+dist)*784;
-unsigned int finalResps[NUMCLASSES] = {0,0,0,0,0,0,0};
+unsigned int finalResps[NUMCLASSES] = { };
 
 
 
@@ -469,7 +469,7 @@ printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, cluster
   printf("Made a lookup\n");
   #endif
   unsigned char signature = 0;
-  unsigned int tempResps[NUMCLASSES] = {0,0,0,0,0,0,0};
+  unsigned int tempResps[NUMCLASSES] = { };
   vote = 100000;
 
   // CHristopher Stewart -- This looks like deadcode

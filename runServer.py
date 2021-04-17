@@ -5,8 +5,8 @@ import subprocess
 import time
 
 #Check args
-if (len(sys.argv)) != 8:
-    print("This command takes 7 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n) dicSplits tabSplits\n")
+if (len(sys.argv)) != 9:
+    print("This command takes 8 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n) dicSplits tabSplits dataset\n")
     exit()
 
 treeName = sys.argv[1]
@@ -16,6 +16,7 @@ ergmode = sys.argv[4]
 metrics = 'y' in sys.argv[5]
 dicSplits = sys.argv[6]
 tabSplits = sys.argv[7]
+dataset = sys.argv[8]
 
 pathSizeFile = "./metadata/" + treeName + ".numpaths.txt"
 f = open(pathSizeFile)
@@ -38,6 +39,19 @@ port = 7878
 cmd = []
 cmd2 = []
 statements = []
+
+if dataset == "mnist":
+    nb = "784"
+    numclasses = "10"
+else:
+    nb = "11"
+    numclasses = "7"
+
+cmd.append("sed -i 's/^# *define NUMCLASSES.*/\#define NUMCLASSES " + numclasses + "/' server/src/inline.cpp")
+statements.append("Changing NUMCLASSES on file")
+
+cmd.append("sed -i 's/^# *define NB.*/\#define NB " + nb + "/' server/src/inline.cpp")
+statements.append("Changing NB on file")
 
 cmd.append("sed -i 's/^# *define ERGMODE.*/\#define ERGMODE " + ergmode + "/' server/src/inline.cpp")
 statements.append("Changing ERGMODE on file")

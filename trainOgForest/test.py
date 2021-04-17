@@ -1,6 +1,5 @@
 import numpy as np
 import sys
-#from keras.datasets import mnist
 import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
@@ -10,34 +9,40 @@ import time
 import os
 import sys
 
-if (len(sys.argv) != 3):
-    print("This command takes 1 parameters: python test.py treeName dumpTree?(1/0)\n")
+if (len(sys.argv) != 4):
+    print("This command takes 3 parameters: python test.py treeName dumpTree?(1/0) dataset\n")
     print("1 means dump trees to ./dot/ directory as dot files")
     exit()
 treeName=sys.argv[1]
 treeDump=int(sys.argv[2])
+dataset = sys.argv[3]
 curpath = os.path.abspath(os.curdir)
 
+if dataset == "mnist":
+    from keras.datasets import mnist
 
 if __name__ == "__main__":
-#    (X_train, y_train), (X_test, y_test) = mnist.load_data()
+    if dataset == "mnist":
+        (X_train, y_train), (X_test, y_test) = mnist.load_data()
+        X_test.shape = (10000,784)
+    else:
+        with open('./trainOgForest/SplitData.pkl', 'rb') as f:
+            testData = pickle.load(f)[1]
+        print("loaded testData")
+
+        X_test = testData[testData.columns.difference(['Severity'])].to_numpy()
+        y_test = testData['Severity'].to_numpy()
+
     with open(curpath + "/trainOgForest/pkl/" + treeName+".forest.pkl", "rb") as f:
         forest = pickle.load(f)
     print("Loaded")
+
     i = 0
-#    X_test.shape = (10000,784)
-    with open('./trainOgForest/SplitData.pkl', 'rb') as f:
-        testData = pickle.load(f)[1]
-    print("loaded testData")
-
-    X_test = testData[testData.columns.difference(['Severity'])].to_numpy()
-    y_test = testData['Severity'].to_numpy()
-
     correct = 0
     predictions = forest.predict(X_test)
     misses = []
     start = time.time()
-    while (i < 700000):
+    while (i < X_test.shape[0]):
         prediction = forest.predict(X_test[i:i+1,:])
         if (predictions[i] == y_test[i]):
             correct = correct + 1
