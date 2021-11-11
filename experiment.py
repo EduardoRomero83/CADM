@@ -3,17 +3,18 @@ import subprocess
 import time
 from trainOgForest import manipData
 
-numTrees = ["2048"]
-depth = ["17"]
-mpc = ["20"]
-maxUnk = ["6"]
+numTrees = ["10"]
+depth = ["4"]
+#mpc = ["17", "18", "19", "20"]
+#maxUnk = ["8"]
+#maxUnk = ["2", "3", "4", "5", "6", "7", "8", "9", "10"]
 #numTrees = ["100"]
 #depth = ["14", "16"]
-#mpc = ["20"]
-#maxUnk = ["4"]
+mpc = ["15"]
+maxUnk = ["8"]
 dicSplits = "1"
 tableSplits = "1"
-dataset = "mnist" # or traffic
+dataset = "mnist" # mnist or traffic
 
 if dataset == "mnist":
     numSamples = "10000"
@@ -43,10 +44,10 @@ for n in numTrees:
                 #time.sleep(10)
                 treeName = "RF." + n + "." + d + "." + m + "." + u
                 print(treeName)
-                cmd = ["timeout", "7200", "python3", "runCompilation.py", n, d, m, u, numSamples, "7", "0", "y", dicSplits, tableSplits, dataset]
+                cmd = ["timeout", "1200", "python3", "runCompilation.py", n, d, m, u, numSamples, "7", "0", "y", dicSplits, tableSplits, dataset]
                 p1 = subprocess.Popen(cmd)
                 time.sleep(10)
-                cmd = ["timeout", "7200", "python3", "runPythonClient.py", numSamples, "n", treeName, "0", "y", dicSplits, tableSplits, dataset]
+                cmd = ["timeout", "1200", "python3", "runPythonClient.py", numSamples, "n", treeName, "0", "y", dicSplits, tableSplits, dataset]
                 time.sleep(60)
                 p2 = subprocess.call(cmd)
                 #cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700", "y", treeName, "1", "y", nCores]

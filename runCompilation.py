@@ -22,10 +22,10 @@ treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
 statements = []
 
-cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth + " " + dataset)
+cmd.append("python3 trainOgForest/train.py " + treeName + " " +  numTrees + " " + " " + maxDepth + " " + dataset + " 2>/dev/null")
 statements.append("Train model")
 if metrics:
-    cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1 " + dataset)
+    cmd.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + ".pythonperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses python3 trainOgForest/test.py " + treeName + " 1 " + dataset + " 2>/dev/null")
     statements.append("DOT files extraction")
 else:
     cmd.append("python3 trainOgForest/test.py " + treeName + " 1 " + dataset)
@@ -78,7 +78,7 @@ cmd.append("python3 splitAddr/split.py " + treeName + " " + mpc + " " + tableSpl
 statements.append("Parallelize addresses")
 if metrics:
     cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " " + ergmode + " y " + dicSplits + " " + tableSplits + " " + dataset + ";")
-    statements.append("Compile and run the server")
+    statements.append("Compile and run the server with metrics")
     #cmd.append("sleep 80")
     #statements.append("Sleeping between runs")
     #cmd.append("python3 runServer.py " + treeName + " " + mpc + " " + numSamples + " 1 y " + dicSplits + ";")

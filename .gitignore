@@ -20,7 +20,14 @@ ResearchData/baseline/*
 ResearchData/merged/*
 ResearchData/raw/*
 ResearchData/combined.csv
-roothpath.clustering/tempFiles/*
-roothpath.clustering/clusteclusteredOutputs/*
+rootpath.clustering/tempFiles/*
 trainOgForest/__pycache__/*
 binadd/tempFiles/*
+binfeats/commonandimp*
+rootpath.clustering/clusteredOutputs/
+delete*
+dataBackup.pkl
+server/src/inline[0-9]*
+trainOgForest/pkl/*
+
+

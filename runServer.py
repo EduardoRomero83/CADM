@@ -94,9 +94,10 @@ for i in range(int(dicSplits)):
       if ergmode == '0':
           #c = ["./server/src/server" + i + ".out", treeName, ">>", "./ResearchData/raw/" + treeName + ".time.txt", "&", "echo"]
           cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(i) + "." + str(j) + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt & echo $! > ./temps/pid" + ergmode)
+          cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
       else:
           cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(i) + "." + str(j) + ".out " + treeName + " > server/testaccuracy/temp" + str(i) + "." + str(j) + " & echo $! > ./temps/pid" + ergmode)
-      cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
+          cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
       statements.append("Run server")
 
     else:
@@ -130,6 +131,8 @@ for j in range(int(dicSplits) * int(tabSplits)):
    #while not psutil.pid_exists(int(pid)):
        #time.sleep(1)
     cmd2[2*j + 1] = cmd2[2*j + 1] + pid
+    p2 = subprocess.Popen(cmd2[2*j + 1], shell=True)
+    print(cmd2[2*j + 1])
     #Disable temporarily perf until we can get all pid correctly
     #p2 = subprocess.Popen(cmd2[2*j + 1], shell=True)
   else:

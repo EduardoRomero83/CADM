@@ -37,8 +37,8 @@ ERGMODE 6 - Print hex of response lines for debugging
 * NUMBITS is the log base two of the smallest power of 2 greater than metadata/treeName.numpaths
 * See definition of resultline for next change
 */
-#define MAXFEAT 18
-#define NUMBITS 17
+#define MAXFEAT 20
+#define NUMBITS 18
 #define NUMBYTES 3
 #define NB 784
 #define NUMCLASSES 10
