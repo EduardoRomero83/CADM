@@ -30,18 +30,18 @@ ERGMODE 6 - Print hex of response lines for debugging
 
 #define MAXMSG  20000
 
-#define SAMPLES 10000
+#define SAMPLES 5000
 /* These two number need to come from argv.
 * MAXFEAT should come directly from argv
 * NUMBITS should be read from metadata.
 * NUMBITS is the log base two of the smallest power of 2 greater than metadata/treeName.numpaths
 * See definition of resultline for next change
 */
-#define MAXFEAT 20
-#define NUMBITS 18
+#define MAXFEAT 15
+#define NUMBITS 17
 #define NUMBYTES 3
-#define NB 784
-#define NUMCLASSES 10
+#define NB 1500
+#define NUMCLASSES 5
 #define PORT 7878
 #define DICSPLIT 0
 #define TABLESPLIT 0

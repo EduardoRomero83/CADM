@@ -25,21 +25,31 @@ if __name__ == "__main__":
     if dataset == "mnist":
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
         X_test.shape = (10000,784)
-    else:
+    elif dataset == "traffic":
         with open('./trainOgForest/SplitData.pkl', 'rb') as f:
             testData = pickle.load(f)[1]
         print("loaded testData")
 
         X_test = testData[testData.columns.difference(['Severity'])].to_numpy()
         y_test = testData['Severity'].to_numpy()
+    else:
+        with open('./trainOgForest/SplitDataR.pkl', 'rb') as f:
+            testData = pickle.load(f)[1]
+        print("loaded testData")
+
+        X_test = testData[testData.columns.difference(['stars'])].to_numpy()
+        y_test = testData['stars'].to_numpy()
+        print(X_test.shape)
+
 
     with open(curpath + "/trainOgForest/pkl/" + treeName+".forest.pkl", "rb") as f:
         forest = pickle.load(f)
-    print("Loaded")
+    print("Loaded tree")
 
     i = 0
     correct = 0
     predictions = forest.predict(X_test)
+    print("Made predictions")
     misses = []
     start = time.time()
     while (i < X_test.shape[0]):

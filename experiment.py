@@ -2,9 +2,10 @@ import os
 import subprocess
 import time
 from trainOgForest import manipData
+from trainOgForest import manipDataR
 
 numTrees = ["10"]
-depth = ["4"]
+depth = ["8"]
 #mpc = ["17", "18", "19", "20"]
 #maxUnk = ["8"]
 #maxUnk = ["2", "3", "4", "5", "6", "7", "8", "9", "10"]
@@ -14,11 +15,11 @@ mpc = ["15"]
 maxUnk = ["8"]
 dicSplits = "1"
 tableSplits = "1"
-dataset = "mnist" # mnist or traffic
+dataset = "restaurant" # mnist or traffic or restaurant
 
 if dataset == "mnist":
     numSamples = "10000"
-else:
+elif dataset == "traffic":
     numSamples = "700000"
     if os.path.exists('./trainOgForest/SplitData.pkl'):
         print('SplitData.pkl exists; proceeding with experiment')
@@ -26,6 +27,15 @@ else:
         print('SplitData.pkl does not exist; creating SplitData.pkl')
         manipData.doEverything()
         print('created SplitData.pkl; proceeding with experiment')
+else:#if dataset == "restaurant":
+    numSamples = "5000"
+    if os.path.exists('./trainOgForest/SplitDataR.pkl'):
+        print('SplitDataR.pkl exists; proceeding with experiment')
+    else:
+        print('SplitDataR.pkl does not exist; creating SplitDataR.pkl')
+        manipDataR.doEverything()
+        print('created SplitDataR.pkl; proceeding with experiment')
+
 
 print('Running experiment')
 cmd = []
@@ -44,10 +54,10 @@ for n in numTrees:
                 #time.sleep(10)
                 treeName = "RF." + n + "." + d + "." + m + "." + u
                 print(treeName)
-                cmd = ["timeout", "1200", "python3", "runCompilation.py", n, d, m, u, numSamples, "7", "0", "y", dicSplits, tableSplits, dataset]
+                cmd = ["timeout", "2400", "python3", "runCompilation.py", n, d, m, u, numSamples, "7", "0", "y", dicSplits, tableSplits, dataset]
                 p1 = subprocess.Popen(cmd)
                 time.sleep(10)
-                cmd = ["timeout", "1200", "python3", "runPythonClient.py", numSamples, "n", treeName, "0", "y", dicSplits, tableSplits, dataset]
+                cmd = ["timeout", "2400", "python3", "runPythonClient.py", numSamples, "n", treeName, "0", "y", dicSplits, tableSplits, dataset]
                 time.sleep(60)
                 p2 = subprocess.call(cmd)
                 #cmd = ["timeout", "7200", "python3", "runPythonClient.py", "700", "y", treeName, "1", "y", nCores]

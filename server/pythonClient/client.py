@@ -12,8 +12,11 @@ times = []
 dataset = sys.argv[3]
 if dataset == "mnist":
     readSize = 28*28
-else:
+elif dataset == "traffic":
     readSize = 11 #11 features, 1 byte each
+else:  #dataset == "traffic":
+    readSize = 1500 #11 features, 1 byte each
+
 
 cores = int(sys.argv[2])
 count = 1

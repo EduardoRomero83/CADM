@@ -24,11 +24,18 @@ if __name__ == "__main__":
         X_train = np.reshape(X_train,(60000,784))
         forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)
         forest.fit(X_train, y_train)
-    else:
+    elif dataset == "traffic":
         with open('./trainOgForest/SplitData.pkl', 'rb') as f:
             trainData = pickle.load(f)[0]
         X_train = trainData[trainData.columns.difference(['Severity'])].to_numpy()
         y_train = trainData['Severity'].to_numpy()
+    else:
+        with open('./trainOgForest/SplitDataR.pkl', 'rb') as f:
+            trainData = pickle.load(f)[0]
+        X_train = trainData[trainData.columns.difference(['stars'])].to_numpy()
+        y_train = trainData['stars'].to_numpy()
+        print(X_train.shape)
+
 
     forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)
     forest.fit(X_train, y_train)

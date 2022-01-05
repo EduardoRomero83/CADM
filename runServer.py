@@ -43,9 +43,13 @@ statements = []
 if dataset == "mnist":
     nb = "784"
     numclasses = "10"
-else:
+elif dataset == "traffic":
     nb = "11"
     numclasses = "7"
+else: # dataset == "restaurant":
+    nb = "1500"
+    numclasses = "5"
+
 
 cmd.append("sed -i 's/^# *define NUMCLASSES.*/\#define NUMCLASSES " + numclasses + "/' server/src/inline.cpp")
 statements.append("Changing NUMCLASSES on file")
