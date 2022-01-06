@@ -3,7 +3,10 @@ import sys
 
 
 if (len(sys.argv)) != 12:
-    print("This command takes 11 parameters: python runCompilation.py numberOfTrees maxDepth mpc maxUnknown numberofTestingSamples numClasses ERGMODE performanceMetrics?(y/n) dicSplits tableSplits dataset\n")
+    print("This command takes 11 parameters: python runCompilation.py " +
+          "numberOfTrees maxDepth" +
+          "mpc maxUnknown numberofTestingSamples numClasses " +
+          "ERGMODE performanceMetrics?(y/n) dicSplits tableSplits dataset\n")
     exit()
 
 numTrees = sys.argv[1]
