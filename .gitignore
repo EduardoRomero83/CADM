@@ -1,4 +1,6 @@
 trainOgForest/SplitData.pkl
+trainOgForest/SplitDataR.pkl
+SplitDataBackupR.pkl
 trainOgForest/dot/*
 paths/TFpaths/*
 temps/*
@@ -29,5 +31,8 @@ delete*
 dataBackup.pkl
 server/src/inline[0-9]*
 trainOgForest/pkl/*
-
+ResearchData/mnistRaw/
+trainOgForest/RestaurantReviews.csv
+trainOgForest/RestaurantsData.csv
+trainOgForest/yelp_review.csv.zip
 
