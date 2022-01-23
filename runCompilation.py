@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 
 
@@ -93,9 +94,15 @@ else:
 i = 0
 for command in cmd:
     print(statements[i])
-    os.system(command) 
+    p = subprocess.Popen(command)
+    status = p.wait()
+    if status == 0:
+        print("Succeeded")
+    else:
+        print("Failed")
+        exit(1)
     i = i + 1
-    if i > 2:
+    if i > 0:
         exit()
 
 
