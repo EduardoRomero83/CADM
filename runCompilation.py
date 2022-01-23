@@ -82,7 +82,7 @@ cmd.append(["cat", "binadd/tempFiles/" + treeName + ".naiveoffset.txt", "|", "wc
 statements.append("Count paths")
 
 cmd.append(["python3", "binadd/step2.firsthash.py", treeName, ">",
-            "binadd/tempFiles/" + treeName ".firsthash.txt"])
+            "binadd/tempFiles/" + treeName + ".firsthash.txt"])
 statements.append("First hash")
 
 cmd.append(["sort", "-k", "1", "binadd/tempFiles/" + treeName + ".firsthash.txt", ">",
