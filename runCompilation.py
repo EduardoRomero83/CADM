@@ -1,4 +1,3 @@
-import os
 import subprocess
 import sys
 
@@ -120,13 +119,13 @@ cmd.append(["python3", "splitAddr/split.py", treeName, mpc, tableSplits])
 statements.append("Parallelize addresses")
 if metrics:
     cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode,
-                y, dicSplits, tableSplits, dataset])
+                "y", dicSplits, tableSplits, dataset])
     statements.append("Compile and run the server with metrics")
     
 else:
    cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode, 
-               n, dicSplits, tableSplits, dataset])
-    statements.append("Compile and run the server")
+               "n", dicSplits, tableSplits, dataset])
+   statements.append("Compile and run the server")
     
 i = 0
 for command in cmd:
