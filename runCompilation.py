@@ -95,7 +95,7 @@ for command in cmd:
     print(statements[i])
     os.system(command) 
     i = i + 1
-    #if i > 2:
-	#exit()
+    if i > 2:
+        exit()
 
 
