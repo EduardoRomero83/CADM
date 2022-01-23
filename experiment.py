@@ -70,7 +70,6 @@ def runOneExperiment(n, d, m, u):
     p2 = subprocess.call(cmdClient)
     cmd = ["python3", "./ResearchData/process.py", treeName]
     p1.wait()
-    p2.wait()
     p4 = subprocess.call(cmd)
     p4.wait()
 
