@@ -36,7 +36,6 @@ if __name__ == "__main__":
         y_train = trainData['stars'].to_numpy()
         print(X_train.shape)
         print(X_train[0])
-        exit()
 
 
     forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)

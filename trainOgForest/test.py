@@ -28,14 +28,14 @@ if __name__ == "__main__":
     elif dataset == "traffic":
         with open('./trainOgForest/SplitData.pkl', 'rb') as f:
             testData = pickle.load(f)[1]
-        print("loaded testData")
+        print("loaded testData traffic")
 
         X_test = testData[testData.columns.difference(['Severity'])].to_numpy()
         y_test = testData['Severity'].to_numpy()
     else:
         with open('./trainOgForest/SplitDataR.pkl', 'rb') as f:
             testData = pickle.load(f)[1]
-        print("loaded testData")
+        print("loaded testData restaurant")
 
         X_test = testData[testData.columns.difference(['stars'])].to_numpy()
         y_test = testData['stars'].to_numpy()
