@@ -35,4 +35,5 @@ ResearchData/mnistRaw/
 trainOgForest/RestaurantReviews.csv
 trainOgForest/RestaurantsData.csv
 trainOgForest/yelp_review.csv.zip
+.spyproject/*
 
