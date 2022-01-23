@@ -64,6 +64,7 @@ def runOneExperiment(n, d, m, u):
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
                   numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, dataset]
     p1 = subprocess.Popen(cmdCompile)
+    p1.wait() # delete later
     """cmdClient = ["timeout", timeout, "python3", "runPythonClient.py", numSamples, clientAccTest,
                  treeName, ERGmode, perfMetrics, dicSplits, tableSplits, dataset]
     time.sleep(60)
@@ -81,5 +82,5 @@ for n in numTrees:
 
 
 cmd = ["python3", "./ResearchData/ultimate.py"]
-subprocess.call(cmd)
+subprocess.Popen(cmd)
 print('done')
