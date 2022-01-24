@@ -8,7 +8,7 @@ import sys
 if (len(sys.argv) != 5):
     print("This command takes 4 parameters: python train.py treeName estimators(int) max_depth(int) dataset\n")
     print("Note: tree name will follow the rest of the compile process.  Choose wisely\n")
-    exit()
+    exit(1)
 
 treeName=sys.argv[1]
 treeEst=int(sys.argv[2])

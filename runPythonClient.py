@@ -5,7 +5,7 @@ import time
 if (len(sys.argv)) != 9:
     print("This command takes 8 parameters: python runServer.py" +
           " NumberOfSamples TestAcc?y/n treeName ERGMODE metrics dicSplits tableSplits dataset\n")
-    exit()
+    exit(1)
 
 numSamples = sys.argv[1]
 test = 'y' in sys.argv[2]

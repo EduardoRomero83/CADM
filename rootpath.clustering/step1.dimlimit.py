@@ -3,7 +3,7 @@ import sys
 
 if (len(sys.argv) != 3):
     print("This command takes 2 parameters: python step1.dimlimit.py treeName max_dims_limit \n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 MAX_FSET = int(sys.argv[2])
 

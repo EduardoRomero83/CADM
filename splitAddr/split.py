@@ -4,7 +4,7 @@ import sys
 
 if (len(sys.argv) != 4):
     print("This command takes 2 parameters: python split.py treeName mpc numCores \n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 mpc = int(sys.argv[2])
 nCores = int(sys.argv[3])

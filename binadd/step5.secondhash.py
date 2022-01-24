@@ -3,7 +3,7 @@ import sys
 
 if (len(sys.argv) != 3):
     print("This command takes 2 parameter: python step5.secondhash.py treeName numClasses\n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 numClasses=int(sys.argv[2])
 

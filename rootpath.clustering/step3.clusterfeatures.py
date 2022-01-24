@@ -3,7 +3,7 @@ import sys
 
 if (len(sys.argv) != 2):
     print("This command takes 2 parameters: python step1.dimlimit.py treeName \n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 
 

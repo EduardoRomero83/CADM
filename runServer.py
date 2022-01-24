@@ -7,7 +7,7 @@ import time
 #Check args
 if (len(sys.argv)) != 9:
     print("This command takes 8 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n) dicSplits tabSplits dataset\n")
-    exit()
+    exit(1)
 
 treeName = sys.argv[1]
 mpc = sys.argv[2]

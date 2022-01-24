@@ -3,7 +3,7 @@ import sys
 
 if (len(sys.argv) != 2):
     print("This command takes 1 parameter: python step2.firsthash.py treeName\n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 
 f = open("./binadd/tempFiles/" + treeName + ".naiveoffset.txt", "r")

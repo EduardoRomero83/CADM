@@ -12,7 +12,7 @@ import sys
 if (len(sys.argv) != 4):
     print("This command takes 3 parameters: python test.py treeName dumpTree?(1/0) dataset\n")
     print("1 means dump trees to ./dot/ directory as dot files")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 treeDump=int(sys.argv[2])
 dataset = sys.argv[3]

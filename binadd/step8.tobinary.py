@@ -4,7 +4,7 @@ import sys
 
 if (len(sys.argv) != 2):
     print("This command takes 1 parameter: python step8.tobinary.py treeName\n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 
 primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,

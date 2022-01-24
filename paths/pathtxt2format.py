@@ -2,7 +2,7 @@ import sys
 
 if (len(sys.argv) != 2):
     print("This command takes 1 parameters: python test.py treeName\n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 
 

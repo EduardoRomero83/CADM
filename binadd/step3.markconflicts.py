@@ -2,7 +2,7 @@ import sys
 
 if (len(sys.argv) != 2):
     print("This command takes 1 parameter: python step3.markconflicts.py treeName\n")
-    exit()
+    exit(1)
 treeName=sys.argv[1]
 
 

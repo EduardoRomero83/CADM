@@ -8,7 +8,7 @@ if (len(sys.argv)) != 12:
           "numberOfTrees maxDepth" +
           "mpc maxUnknown numberofTestingSamples numClasses " +
           "ERGMODE performanceMetrics?(y/n) dicSplits tableSplits dataset\n")
-    exit()
+    exit(1)
 
 numTrees = sys.argv[1]
 maxDepth = sys.argv[2]
@@ -132,13 +132,28 @@ i = 0
 for command in cmd:
     print(statements[i])
     if len(command) > 1:
-        p = subprocess.Popen(command)
-        status = p.wait()
-        if status == 0:
-            print("Succeeded")
+        if ">" in command:
+            redirectIndex = command.index(">")
+            outfile = command[redirectIndex:]
+            command = command[:redirectIndex]
+            with open(outfile[0], "w+") as f:
+                print(command)
+                print(outfile)
+                p = subprocess.Popen(command, stdout=f)
+                status = p.wait()
+                if status == 0:
+                    print("Succeeded")
+                else:
+                    print("Failed")
+                    exit(1)
         else:
-            print("Failed")
-            exit(1)
+            p = subprocess.Popen(command)
+            status = p.wait()
+            if status == 0:
+                print("Succeeded")
+            else:
+                print("Failed")
+                exit(1)
     else:
         os.system(command[0])
     i = i + 1
