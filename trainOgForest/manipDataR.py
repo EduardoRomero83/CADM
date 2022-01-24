@@ -144,14 +144,14 @@ def doEverything():
     rest_path = './trainOgForest/RestaurantReviews.csv'
     rest_raw = open(rest_path, 'rt')
     rest_df = pd.read_csv(rest_raw, sep=",", header=0, keep_default_na=False)
-    # Must downsample to about 10000
-    rest_df.drop(rest_df.tail(17745000).index, inplace = True)
+    rest_df.drop(rest_df.tail(4500000).index, inplace = True)
     # makes a subset of the dataset
     #"review_id","user_id","business_id","stars","date","text","useful","funny","cool"
 
     rest_df2 = rest_df[["stars","text"]]
     #rest_df2 = makeDataSubset(rest_df2)
     rest_df2 = parallelize_dataframe(rest_df2, makeDataSubset, 24)
+    rest_df2 = rest_def2.head(1000)
     rest_df2.to_csv('./trainOgForest/RestaurantsData.csv', index=False)
     splitData()
 
