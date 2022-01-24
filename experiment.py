@@ -72,18 +72,16 @@ def runOneExperiment(n, d, m, u):
     p1status = p1.wait()
     if p1status == 0 and p2status == 0:
         subprocess.call(cmd)
-        return True
-    return False
+        print(treeName + " succeeded")
+    else:
+        print(treeName + " failed")
 
 print('Running experiment')
 for n in numTrees:
     for d in depth:
         for m in mpc:
             for u in maxUnk:
-                if runOneExperiment(n, d, m, u):
-                    print(treeName + " succeeded")
-                else:
-                    print(treeName + " failed")
+                runOneExperiment(n, d, m, u)
 
 
 cmd = ["python3", "./ResearchData/ultimate.py"]

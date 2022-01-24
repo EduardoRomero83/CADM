@@ -54,8 +54,8 @@ statements.append("Clusters unkown limit")
 cmd.append(["python3", "rootpath.clustering/step3.clusterfeatures.py", treeName])
 statements.append("Get cluster features file")
 
-cmd.append(["sort", "-n", "-k", "1", "rootpath.clustering/tempFiles/" + treeName +
-            ".clusterfeatures.txt", ">", "rootpath.clustering/tempFiles/"+ treeName +
+cmd.append(["sort -n -k 1 rootpath.clustering/tempFiles/" + treeName +
+            ".clusterfeatures.txt > rootpath.clustering/tempFiles/"+ treeName +
             "clusterfeatures.sorted.txt"])
 statements.append("Sort")
 
