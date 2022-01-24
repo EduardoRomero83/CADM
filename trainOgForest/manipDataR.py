@@ -102,7 +102,7 @@ def makeDataSubset(df):
 
     x = pd.DataFrame(cv.fit_transform(df["text"]).toarray())
     print(x.shape)
-    x["stars"] = df["stars"].astype(int)
+    x[1500] = df["stars"].astype(int)
     """
     df['Distance(mi)'] = df['Distance(mi)'].map(lambda x: normalizeDistance(x))
     print("normalized distance")
