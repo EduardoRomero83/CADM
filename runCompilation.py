@@ -136,7 +136,7 @@ for command in cmd:
             redirectIndex = command.index(">")
             outfile = command[redirectIndex:]
             command = command[:redirectIndex]
-            with open(outfile[0], "w+") as f:
+            with open(outfile[1], "w+") as f:
                 print(command)
                 print(outfile)
                 p = subprocess.Popen(command, stdout=f)
