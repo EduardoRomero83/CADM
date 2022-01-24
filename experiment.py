@@ -64,21 +64,26 @@ def runOneExperiment(n, d, m, u):
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
                   numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, dataset]
     p1 = subprocess.Popen(cmdCompile)
-    p1.wait() # delete later
-    """cmdClient = ["timeout", timeout, "python3", "runPythonClient.py", numSamples, clientAccTest,
+    cmdClient = ["timeout", timeout, "python3", "runPythonClient.py", numSamples, clientAccTest,
                  treeName, ERGmode, perfMetrics, dicSplits, tableSplits, dataset]
     time.sleep(60)
-    subprocess.call(cmdClient)
+    p2status = subprocess.call(cmdClient)
     cmd = ["python3", "./ResearchData/process.py", treeName]
-    p1.wait()
-    subprocess.call(cmd)"""
+    p1status = p1.wait()
+    if p1status == 0 and p2status == 0:
+        subprocess.call(cmd)
+        return True
+    return False
 
 print('Running experiment')
 for n in numTrees:
     for d in depth:
         for m in mpc:
             for u in maxUnk:
-                runOneExperiment(n, d, m, u)
+                if runOneExperiment(n, d, m, u):
+                    print(treeName + " succeeded")
+                else:
+                    print(treeName + " failed")
 
 
 cmd = ["python3", "./ResearchData/ultimate.py"]

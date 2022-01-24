@@ -138,7 +138,7 @@ for command in cmd:
         print("Failed")
         exit(1)
     i = i + 1
-    if i > 2:
-        exit()
+    #if i > 2:
+        #exit()
 
 
