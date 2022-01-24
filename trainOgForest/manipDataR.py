@@ -144,7 +144,8 @@ def doEverything():
     rest_path = './trainOgForest/RestaurantReviews.csv'
     rest_raw = open(rest_path, 'rt')
     rest_df = pd.read_csv(rest_raw, sep=",", header=0, keep_default_na=False)
-    rest_df.drop(rest_df.tail(4500000).index, inplace = True)
+    # Must downsample to about 10000
+    rest_df.drop(rest_df.tail(17745000).index, inplace = True)
     # makes a subset of the dataset
     #"review_id","user_id","business_id","stars","date","text","useful","funny","cool"
 

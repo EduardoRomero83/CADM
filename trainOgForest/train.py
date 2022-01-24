@@ -41,9 +41,9 @@ if __name__ == "__main__":
 
 
     forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)
-    for i in range(len(X_train)):
+    """for i in range(len(X_train)):
         print(i)
-        forest.fit([X_train[i]], [y_train[i]])
+        forest.fit([X_train[i]], [y_train[i]])"""
     forest.fit(X_train, y_train)
     print("trained")
     # dump
