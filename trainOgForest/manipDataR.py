@@ -151,7 +151,7 @@ def doEverything():
     rest_df2 = rest_df[["stars","text"]]
     #rest_df2 = makeDataSubset(rest_df2)
     rest_df2 = parallelize_dataframe(rest_df2, makeDataSubset, 24)
-    rest_df2 = rest_def2.head(1000)
+    rest_df2 = rest_df2.head(1000)
     rest_df2.to_csv('./trainOgForest/RestaurantsData.csv', index=False)
     splitData()
 
