@@ -140,7 +140,7 @@ for command in cmd:
             print("Failed")
             exit(1)
     else:
-        os.system(command)
+        os.system(command[0])
     i = i + 1
     #if i > 2:
         #exit()
