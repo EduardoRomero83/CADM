@@ -57,7 +57,7 @@ statements.append("Get cluster features file")
 
 cmd.append(["sort -n -k 1 rootpath.clustering/tempFiles/" + treeName +
             ".clusterfeatures.txt > rootpath.clustering/tempFiles/" + treeName +
-            "clusterfeatures.sorted.txt"])
+            ".clusterfeatures.sorted.txt"])
 statements.append("Sort")
 
 cmd.append(["python3", "rootpath.clustering/step4.join2files.py", treeName])
