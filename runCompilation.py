@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 
@@ -55,7 +56,7 @@ cmd.append(["python3", "rootpath.clustering/step3.clusterfeatures.py", treeName]
 statements.append("Get cluster features file")
 
 cmd.append(["sort -n -k 1 rootpath.clustering/tempFiles/" + treeName +
-            ".clusterfeatures.txt > rootpath.clustering/tempFiles/"+ treeName +
+            ".clusterfeatures.txt > rootpath.clustering/tempFiles/" + treeName +
             "clusterfeatures.sorted.txt"])
 statements.append("Sort")
 
@@ -76,7 +77,7 @@ cmd.append(["python3", "binadd/step1.makeNaiveOffset.py", treeName, mpc, ">",
             "binadd/tempFiles/" + treeName + ".naiveoffset.txt"])
 statements.append("Naive offset")
 
-cmd.append(["cat", "binadd/tempFiles/" + treeName + ".naiveoffset.txt", "|", "wc", "-l", ">",
+cmd.append(["cat binadd/tempFiles/" + treeName + ".naiveoffset.txt | wc -l > " +
             "metadata/" + treeName + ".numpaths.txt"])
 statements.append("Count paths")
 
@@ -84,7 +85,7 @@ cmd.append(["python3", "binadd/step2.firsthash.py", treeName, ">",
             "binadd/tempFiles/" + treeName + ".firsthash.txt"])
 statements.append("First hash")
 
-cmd.append(["sort", "-k", "1", "binadd/tempFiles/" + treeName + ".firsthash.txt", ">",
+cmd.append(["sort -k 1 binadd/tempFiles/" + treeName + ".firsthash.txt > " +
             "binadd/tempFiles/" + treeName + ".firsthash.sorted.txt"])
 statements.append("Sort")
 
@@ -100,7 +101,7 @@ cmd.append(["python3", "binadd/step5.secondhash.py", treeName, numClasses, ">",
             "binadd/tempFiles/" + treeName + ".secondhash.txt"])
 statements.append("Second hash")
 
-cmd.append(["sort", "-k", "2", "binadd/tempFiles/" + treeName + ".secondhash.txt", ">",
+cmd.append(["sort -k 2 binadd/tempFiles/" + treeName + ".secondhash.txt > " +
             "binadd/tempFiles/" + treeName + ".secondhash.sorted.txt"])
 statements.append("Sort")
 
@@ -130,13 +131,16 @@ else:
 i = 0
 for command in cmd:
     print(statements[i])
-    p = subprocess.Popen(command)
-    status = p.wait()
-    if status == 0:
-        print("Succeeded")
+    if len(command) > 1:
+        p = subprocess.Popen(command)
+        status = p.wait()
+        if status == 0:
+            print("Succeeded")
+        else:
+            print("Failed")
+            exit(1)
     else:
-        print("Failed")
-        exit(1)
+        os.system(command)
     i = i + 1
     #if i > 2:
         #exit()
