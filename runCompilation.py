@@ -9,7 +9,7 @@ if (len(sys.argv)) != 12:
           "mpc maxUnknown numberofTestingSamples numClasses " +
           "ERGMODE performanceMetrics?(y/n) dicSplits tableSplits dataset\n")
     exit(1)
-
+erjhfgrejhgrh
 numTrees = sys.argv[1]
 maxDepth = sys.argv[2]
 mpc = sys.argv[3]
