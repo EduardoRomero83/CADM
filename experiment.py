@@ -16,14 +16,21 @@ dicSplits = "1"
 tableSplits = "1"
 """
 Dataset to test.
-Values can be:  mnist or traffic or restaurant
+Values can be:  mnist, traffic, or restaurant.
+Declare and initialize the rest of the variables.
 """
-dataset = "restaurant"
-timeout = "2400"
+dataset = "mnist"
+timeout = "400"
 ERGmode = "0"
 perfMetrics = "y"
 clientAccTest = "n"
+numSamples = 0
+numClasses = 0
 
+"""
+The dataset determines the values of numSamples and numClasses.
+If no valid dataset was detected, the program will end.
+"""
 if dataset == "mnist":
     numSamples = "10000"
     numClasses = "10"
@@ -45,6 +52,9 @@ elif dataset == "restaurant":
         print('SplitDataR.pkl does not exist; creating SplitDataR.pkl')
         manipDataR.doEverything()
         print('created SplitDataR.pkl; proceeding with experiment')
+else:
+    print('No valid dataset was detected.')
+    exit(1)
 
 
 def resetReadyFile():
@@ -76,6 +86,9 @@ def runOneExperiment(n, d, m, u):
     else:
         print(treeName + " failed")
 
+"""
+Runs one experiment.
+"""
 print('Running experiment')
 for n in numTrees:
     for d in depth:
@@ -83,7 +96,9 @@ for n in numTrees:
             for u in maxUnk:
                 runOneExperiment(n, d, m, u)
 
-
+"""
+After one experiment has run, run ultimate.py to display the results.
+"""
 cmd = ["python3", "./ResearchData/ultimate.py"]
 subprocess.Popen(cmd)
 print('done')
