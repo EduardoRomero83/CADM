@@ -20,7 +20,7 @@ Values can be:  mnist, traffic, or restaurant.
 Declare and initialize the rest of the variables.
 """
 dataset = "mnist"
-timeout = "400"
+timeout = "2400"
 ERGmode = "0"
 perfMetrics = "y"
 clientAccTest = "n"
