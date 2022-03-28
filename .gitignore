@@ -2,7 +2,6 @@ trainOgForest/SplitData.pkl
 trainOgForest/SplitDataR.pkl
 SplitDataBackupR.pkl
 trainOgForest/dot/*
-paths/TFpaths/*
 temps/*
 server/src/*.out
 server/testaccuracy/temp*
@@ -15,12 +14,8 @@ trainOgForest/__pycache__/*
 binfeats/featurespercluster*
 binfeats/numericPaths*
 data/*
-metadata/*
 paths/RF*
-paths/numericPaths/*
 ResearchData/baseline/*
-ResearchData/merged/*
-ResearchData/raw/*
 ResearchData/combined.csv
 rootpath.clustering/tempFiles/*
 trainOgForest/__pycache__/*
