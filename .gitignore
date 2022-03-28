@@ -2,7 +2,6 @@ trainOgForest/SplitData.pkl
 trainOgForest/SplitDataR.pkl
 SplitDataBackupR.pkl
 trainOgForest/dot/*
-temps/*
 server/src/*.out
 server/testaccuracy/temp*
 server/src/inline[0-9].[0-9].cpp
