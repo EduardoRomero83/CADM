@@ -1,9 +1,6 @@
 trainOgForest/SplitData.pkl
 trainOgForest/SplitDataR.pkl
 SplitDataBackupR.pkl
-#trainOgForest/dot/*
-#paths/TFpaths/*
-#temps/*
 server/src/*.out
 server/testaccuracy/temp*
 server/src/inline[0-9].[0-9].cpp
@@ -14,17 +11,13 @@ trainOgForest/__pycache__/*
 *.out
 binfeats/featurespercluster*
 binfeats/numericPaths*
-#data/*
-#metadata/*
 paths/RF*
-#paths/numericPaths/*
 ResearchData/baseline/*
 ResearchData/merged/*
 ResearchData/raw/*
 ResearchData/combined.csv
 rootpath.clustering/tempFiles/*
 trainOgForest/__pycache__/*
-#binadd/tempFiles/*
 binfeats/commonandimp*
 rootpath.clustering/clusteredOutputs/
 delete*
@@ -37,3 +30,11 @@ trainOgForest/RestaurantsData.csv
 trainOgForest/yelp_review.csv.zip
 .spyproject/*
 
+# Empty directories that are kept to ensure experiment.py works
+# binadd/tempFiles/*
+# paths/numericPaths/*
+# data/*
+# metadata/*
+# trainOgForest/dot/*
+# paths/TFpaths/*
+# temps/*
