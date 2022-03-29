@@ -138,7 +138,7 @@ for j in range(int(dicSplits) * int(tabSplits)):
     p2 = subprocess.Popen(cmd2[2*j + 1], shell=True)
     print(cmd2[2*j + 1])
     #Disable temporarily perf until we can get all pid correctly
-    #p2 = subprocess.Popen(cmd2[2*j + 1], shell=True)
+    p2 = subprocess.Popen(cmd2[2*j + 1], shell=True)
   else:
     p1 = subprocess.Popen(cmd2[i], shell=True)
     print(statements[i])
