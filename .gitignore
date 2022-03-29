@@ -13,9 +13,6 @@ binfeats/featurespercluster*
 binfeats/numericPaths*
 paths/RF*
 ResearchData/baseline/*
-ResearchData/merged/*
-ResearchData/raw/*
-ResearchData/combined.csv
 rootpath.clustering/tempFiles/*
 trainOgForest/__pycache__/*
 binfeats/commonandimp*
@@ -38,3 +35,6 @@ trainOgForest/yelp_review.csv.zip
 # trainOgForest/dot/*
 # paths/TFpaths/*
 # temps/*
+# ResearchData/merged/*
+# ResearchData/raw/*
+# ResearchData/combined.csv
