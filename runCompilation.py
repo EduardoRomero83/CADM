@@ -52,7 +52,8 @@ statements.append("Get numeric paths")
 
 if matrix == 'y':
     """ run matrix clustering algorithm """
-    
+    cmd.append(["python3", "rootpath.matrixClustering/getMatrixFromPaths.py", treeName])
+    statements.append("Producing matrix")
     
 
 else:
