@@ -52,7 +52,7 @@ statements.append("Get numeric paths")
 
 if matrix == 'y':
     """ run matrix clustering algorithm """
-    cmd.append(["python3", "rootpath.matrixClustering/getMatrixFromPaths.py", treeName])
+    cmd.append(["python3", "rootpath.matrixClustering/getMatrixFromPaths.py>rootpath.matrixClustering/readLines.txt", treeName])
     statements.append("Producing matrix")
     
 
@@ -129,16 +129,16 @@ else:
     
     cmd.append(["python3", "splitAddr/split.py", treeName, mpc, tableSplits])
     statements.append("Parallelize addresses")
-
-if metrics:
-    cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode,
-                "y", dicSplits, tableSplits, dataset])
-    statements.append("Compile and run the server with metrics")
     
-else:
-   cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode, 
-               "n", dicSplits, tableSplits, dataset])
-   statements.append("Compile and run the server")
+    if metrics:
+        cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode,
+                    "y", dicSplits, tableSplits, dataset])
+        statements.append("Compile and run the server with metrics")
+
+    else:
+        cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode, 
+                    "n", dicSplits, tableSplits, dataset])
+        statements.append("Compile and run the server")
     
 i = 0
 for command in cmd:
@@ -170,6 +170,6 @@ for command in cmd:
         os.system(command[0])
     i = i + 1
     #if i > 2:
-        #exit()
+    #exit()
 
 
