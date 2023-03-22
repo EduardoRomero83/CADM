@@ -64,7 +64,7 @@ def runOneExperiment(n, d, m, u):
     treeName = "RF." + n + "." + d + "." + m + "." + u
     print(treeName)
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
-                  numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, dataset, coresAvailable]
+                  numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset, coresAvailable]
     p1 = subprocess.Popen(cmdCompile)
     cmdClient = ["timeout", timeout, "python3", "runPythonClient.py", numSamples, clientAccTest,
                  treeName, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset]

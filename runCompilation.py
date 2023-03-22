@@ -9,7 +9,7 @@ if (len(sys.argv)) != 14:
           "mpc maxUnknown numberofTestingSamples numClasses " +
           "ERGMODE performanceMetrics?(y/n) dicSplits tableSplits replicas " + 
           "dataset coresAvailable\n")
-    print("Instead received " + str(len(sys.argv)) + " parameters")
+    print("Instead received " + str(len(sys.argv) - 1) + " parameters")
     exit(1)
 
 numTrees = sys.argv[1]
