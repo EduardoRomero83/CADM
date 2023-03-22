@@ -75,7 +75,7 @@ statements.append("Changing number of features per cluster")
 for i in range(int(dicSplits)):
   for j in range(int(tabSplits)):
     copyID = i * int(tabSplits) + j
-    coreMask = 1 << (copyID % coresAvailable)
+    coreMask = 1 << (copyID % int(coresAvailable))
     cmd.append("cp server/src/inline.cpp server/src/inline" + str(i) + "." + str(j) + ".cpp")
     statements.append("Copy files")
     cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
