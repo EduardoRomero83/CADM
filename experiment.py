@@ -15,7 +15,7 @@ maxUnk = [str(x) for x in [8]]
 dicSplits = "1"
 tableSplits = "1"
 replicas = "1"
-coresAvailable = 24
+coresAvailable = "24"
 """
 Dataset to test.
 Values can be:  mnist or traffic or restaurant
