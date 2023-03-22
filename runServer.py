@@ -5,7 +5,7 @@ import subprocess
 import time
 
 #Check args
-if (len(sys.argv)) != 1:
+if (len(sys.argv)) != 11:
     print("This command takes 10 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n) dicSplits tabSplits replicas dataset coresAvailable\n")
     print("Instead received " + str(len(sys.argv) - 1) + " parameters")
     exit(1)

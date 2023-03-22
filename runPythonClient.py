@@ -2,9 +2,9 @@ import os
 import sys
 import time
 
-if (len(sys.argv)) != 1:
-    print("This command takes 8 parameters: python runPythonClient.py" +
-          " NumberOfSamples TestAcc?y/n treeName ERGMODE metrics dicSplits tableSplits dataset\n")
+if (len(sys.argv)) != 10:
+    print("This command takes 9 parameters: python runPythonClient.py" +
+          " NumberOfSamples TestAcc?y/n treeName ERGMODE metrics dicSplits tableSplits replicas dataset\n")
     print("Instead received " + str(len(sys.argv) - 1) + " parameters")
     exit(1)
 
