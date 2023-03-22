@@ -2,7 +2,7 @@ import os
 import sys
 import time
 
-if (len(sys.argv)) != 9:
+if (len(sys.argv)) != 10:
     print("This command takes 8 parameters: python runServer.py" +
           " NumberOfSamples TestAcc?y/n treeName ERGMODE metrics dicSplits tableSplits dataset\n")
     exit(1)
@@ -15,11 +15,13 @@ pidfile = "./temps/pid" + ergmode.strip()
 metrics = 'y' in sys.argv[5]
 dicSplits = sys.argv[6]
 tableSplits = sys.argv[7]
+replicas = sys.argv[8]
+dataset = sys.argv[9]
 pid = 0
 numCores = int(dicSplits) * int(tableSplits)
 
 print(pidfile)
-cmd = "python3 server/pythonClient/client.py " + numSamples + " " + str(numCores) + " " + sys.argv[8] + ";"
+cmd = "python3 server/pythonClient/client.py " + numSamples + " " + str(numCores) + " " + dataset + ";"
 print("Run Client")
 
 ready = False

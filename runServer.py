@@ -5,8 +5,8 @@ import subprocess
 import time
 
 #Check args
-if (len(sys.argv)) != 9:
-    print("This command takes 8 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n) dicSplits tabSplits dataset\n")
+if (len(sys.argv)) != 11:
+    print("This command takes 10 parameters: python runServer.py treeName mpc NumberOfSamples ERGMODE performanceMetrics(y/n) dicSplits tabSplits replicas dataset coresAvailable\n")
     exit(1)
 
 treeName = sys.argv[1]
@@ -16,7 +16,9 @@ ergmode = sys.argv[4]
 metrics = 'y' in sys.argv[5]
 dicSplits = sys.argv[6]
 tabSplits = sys.argv[7]
-dataset = sys.argv[8]
+replicas = sys.argv[8]
+dataset = sys.argv[9]
+coresAvailable = sys.argv[10]
 
 pathSizeFile = "./metadata/" + treeName + ".numpaths.txt"
 f = open(pathSizeFile)
@@ -72,7 +74,7 @@ statements.append("Changing number of features per cluster")
 for i in range(int(dicSplits)):
   for j in range(int(tabSplits)):
     copyID = i * int(tabSplits) + j
-    coreMask = 1 << copyID
+    coreMask = 1 << (copyID % coresAvailable)
     cmd.append("cp server/src/inline.cpp server/src/inline" + str(i) + "." + str(j) + ".cpp")
     statements.append("Copy files")
     cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
@@ -142,5 +144,7 @@ for j in range(int(dicSplits) * int(tabSplits)):
   else:
     p1 = subprocess.Popen(cmd2[i], shell=True)
     print(statements[i])
-    i = i + 1 
+    i = i + 1
+print("Replicas are: " + replicas)
+print("Cores are: " + coresAvailable)
 

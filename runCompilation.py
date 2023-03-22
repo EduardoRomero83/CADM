@@ -3,11 +3,12 @@ import subprocess
 import sys
 
 
-if (len(sys.argv)) != 12:
+if (len(sys.argv)) != 14:
     print("This command takes 11 parameters: python runCompilation.py " +
           "numberOfTrees maxDepth" +
           "mpc maxUnknown numberofTestingSamples numClasses " +
-          "ERGMODE performanceMetrics?(y/n) dicSplits tableSplits dataset\n")
+          "ERGMODE performanceMetrics?(y/n) dicSplits tableSplits replicas " + 
+          "dataset coresAvailable\n")
     exit(1)
 
 numTrees = sys.argv[1]
@@ -20,7 +21,9 @@ ergmode = sys.argv[7]
 metrics = 'y' in sys.argv[8]
 dicSplits = sys.argv[9]
 tableSplits = sys.argv[10]
-dataset = sys.argv[11]
+replicas = sys.argv[11]
+dataset = sys.argv[12]
+coresAvailable = sys.argv[13]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
 cmd = []
@@ -123,12 +126,12 @@ cmd.append(["python3", "splitAddr/split.py", treeName, mpc, tableSplits])
 statements.append("Parallelize addresses")
 if metrics:
     cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode,
-                "y", dicSplits, tableSplits, dataset])
+                "y", dicSplits, tableSplits, replicas, dataset, coresAvailable])
     statements.append("Compile and run the server with metrics")
     
 else:
    cmd.append(["python3", "runServer.py", treeName, mpc, numSamples, ergmode, 
-               "n", dicSplits, tableSplits, dataset])
+               "n", dicSplits, tableSplits, replicas, dataset, coresAvailable])
    statements.append("Compile and run the server")
     
 i = 0

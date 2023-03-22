@@ -14,6 +14,8 @@ mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
 dicSplits = "1"
 tableSplits = "1"
+replicas = "1"
+coresAvailable = 24
 """
 Dataset to test.
 Values can be:  mnist or traffic or restaurant
@@ -62,10 +64,10 @@ def runOneExperiment(n, d, m, u):
     treeName = "RF." + n + "." + d + "." + m + "." + u
     print(treeName)
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
-                  numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, dataset]
+                  numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, dataset, coresAvailable]
     p1 = subprocess.Popen(cmdCompile)
     cmdClient = ["timeout", timeout, "python3", "runPythonClient.py", numSamples, clientAccTest,
-                 treeName, ERGmode, perfMetrics, dicSplits, tableSplits, dataset]
+                 treeName, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset]
     time.sleep(60)
     p2status = subprocess.call(cmdClient)
     cmd = ["python3", "./ResearchData/process.py", treeName]
