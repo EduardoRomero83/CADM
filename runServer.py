@@ -101,10 +101,10 @@ for k in range(int(replicas)):
         if metrics:
           if ergmode == '0':
               #c = ["./server/src/server" + i + ".out", treeName, ">>", "./ResearchData/raw/" + treeName + ".time.txt", "&", "echo"]
-              cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt & echo $! > ./temps/pid" + ergmode)
+              cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".replica" + str(k) + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt & echo $! > ./temps/pid" + ergmode)
               cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
           else:
-              cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " + treeName + " > server/testaccuracy/temp" + str(i) + "." + str(j) + " & echo $! > ./temps/pid" + ergmode)
+              cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " + treeName + " > server/testaccuracy/temp" + str(k) + "." + str(i) + "." + str(j) + " & echo $! > ./temps/pid" + ergmode)
               cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
           statements.append("Run server")
     
