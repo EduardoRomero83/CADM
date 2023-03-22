@@ -19,7 +19,7 @@ tableSplits = sys.argv[7]
 replicas = sys.argv[8]
 dataset = sys.argv[9]
 pid = 0
-numCores = int(dicSplits) * int(tableSplits)
+numCores = int(dicSplits) * int(tableSplits) * int(replicas)
 
 print(pidfile)
 cmd = "python3 server/pythonClient/client.py " + numSamples + " " + str(numCores) + " " + dataset + ";"

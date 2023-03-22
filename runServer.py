@@ -72,44 +72,45 @@ statements.append("Changing number of bits per sample")
 cmd.append("sed -i 's/^# *define MAXFEAT.*/\#define MAXFEAT " + mpc + "/' server/src/inline.cpp")
 statements.append("Changing number of features per cluster")
 
-for i in range(int(dicSplits)):
-  for j in range(int(tabSplits)):
-    copyID = i * int(tabSplits) + j
-    coreMask = 1 << (copyID % int(coresAvailable))
-    cmd.append("cp server/src/inline.cpp server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Copy files")
-    cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Changing the ports")
-    cmd.append("sed -i 's/^# *define DICSPLIT.*/\#define DICSPLIT " + str(i) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Assigning dictionary partition")
-    cmd.append("sed -i 's/^# *define TABLESPLIT.*/\#define TABLESPLIT " + str(j) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Assigning table partition")
-    cmd.append("sed -i 's/^# *define CLUSTEROFFSET.*/\#define CLUSTEROFFSET " + str(i * numClustersPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Fixing dic offset")
-    cmd.append("sed -i 's/^# *define TABLEOFFSET.*/\#define TABLEOFFSET " + str(j * numPathsPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-    statements.append("Fixing table offset")
-    if j == int(tabSplits) -1:
-        cmd.append("sed -i 's/^# *define TABLEUPPERLIMIT.*/\#define TABLEUPPERLIMIT " + str((j + 2) * numPathsPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-        statements.append("Fixing table upper bound")
-    else:
-        cmd.append("sed -i 's/^# *define TABLEUPPERLIMIT.*/\#define TABLEUPPERLIMIT " + str((j + 1) * numPathsPerFile) + "/' server/src/inline" + str(i) + "." + str(j) + ".cpp")
-        statements.append("Fixing table upper bound")
-    cmd.append("cd server/src/; g++  -o server" + str(i) + "." + str(j) + ".out -funsafe-loop-optimizations -funroll-all-loops -O3 inline" + str(i) + "." + str(j) + ".cpp; cd ../../") 
-    statements.append("Compile C++ file")
-
-    if metrics:
-      if ergmode == '0':
-          #c = ["./server/src/server" + i + ".out", treeName, ">>", "./ResearchData/raw/" + treeName + ".time.txt", "&", "echo"]
-          cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(i) + "." + str(j) + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt & echo $! > ./temps/pid" + ergmode)
-          cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
-      else:
-          cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(i) + "." + str(j) + ".out " + treeName + " > server/testaccuracy/temp" + str(i) + "." + str(j) + " & echo $! > ./temps/pid" + ergmode)
-          cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
-      statements.append("Run server")
-
-    else:
-      cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(i) + "." + str(j) + ".out " +  treeName + " > server/testaccuracy/temp" + str(i) + "." + str(j))
-      statements.append("Run server")
+for k in range(int(replicas)):
+    for i in range(int(dicSplits)):
+      for j in range(int(tabSplits)):
+        copyID = k * int(dicSplits) * int(tabSplits) + i * int(tabSplits) + j
+        coreMask = 1 << (copyID % int(coresAvailable))
+        cmd.append("cp server/src/inline.cpp server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Copy files")
+        cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Changing the ports")
+        cmd.append("sed -i 's/^# *define DICSPLIT.*/\#define DICSPLIT " + str(i) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Assigning dictionary partition")
+        cmd.append("sed -i 's/^# *define TABLESPLIT.*/\#define TABLESPLIT " + str(j) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Assigning table partition")
+        cmd.append("sed -i 's/^# *define CLUSTEROFFSET.*/\#define CLUSTEROFFSET " + str(i * numClustersPerFile) + "/' server/srcinline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Fixing dic offset")
+        cmd.append("sed -i 's/^# *define TABLEOFFSET.*/\#define TABLEOFFSET " + str(j * numPathsPerFile) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Fixing table offset")
+        if j == int(tabSplits) -1:
+            cmd.append("sed -i 's/^# *define TABLEUPPERLIMIT.*/\#define TABLEUPPERLIMIT " + str((j + 2) * numPathsPerFile) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+            statements.append("Fixing table upper bound")
+        else:
+            cmd.append("sed -i 's/^# *define TABLEUPPERLIMIT.*/\#define TABLEUPPERLIMIT " + str((j + 1) * numPathsPerFile) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+            statements.append("Fixing table upper bound")
+        cmd.append("cd server/src/; g++  -o server" + str(k) + "." + str(i) + "." + str(j) + ".out -funsafe-loop-optimizations -funroll-all-loops -O3 inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp; cd ../../") 
+        statements.append("Compile C++ file")
+    
+        if metrics:
+          if ergmode == '0':
+              #c = ["./server/src/server" + i + ".out", treeName, ">>", "./ResearchData/raw/" + treeName + ".time.txt", "&", "echo"]
+              cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " + treeName + " >> ./ResearchData/raw/" + treeName + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt & echo $! > ./temps/pid" + ergmode)
+              cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
+          else:
+              cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " + treeName + " > server/testaccuracy/temp" + str(i) + "." + str(j) + " & echo $! > ./temps/pid" + ergmode)
+              cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + treeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
+          statements.append("Run server")
+    
+        else:
+          cmd2.append("taskset " + str(coreMask) + " ./server/src/server" + str(k) + "." + str(i) + "." + str(j) + ".out " +  treeName + " > server/testaccuracy/temp" + str(k) + "." + str(i) + "." + str(j))
+          statements.append("Run server")
 
 i = 0
 for command in cmd:
@@ -117,7 +118,7 @@ for command in cmd:
     os.system(command) 
     i = i + 1
 
-for j in range(int(dicSplits) * int(tabSplits)):
+for j in range(int(dicSplits) * int(tabSplits) * int(replicas)):
   if metrics:
     pidfile = "./temps/pid" + ergmode.strip()
     p1 = subprocess.Popen(cmd2[2*j], shell=True)
@@ -146,6 +147,4 @@ for j in range(int(dicSplits) * int(tabSplits)):
     p1 = subprocess.Popen(cmd2[i], shell=True)
     print(statements[i])
     i = i + 1
-print("Replicas are: " + replicas)
-print("Cores are: " + coresAvailable)
 

@@ -14,7 +14,7 @@ mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
 dicSplits = "1"
 tableSplits = "1"
-replicas = "1"
+replicas = "4"
 coresAvailable = "24"
 """
 Dataset to test.

@@ -15,7 +15,7 @@ if dataset == "mnist":
 elif dataset == "traffic":
     readSize = 11 #11 features, 1 byte each
 else:  #dataset == "traffic":
-    readSize = 1500 #11 features, 1 byte each
+    readSize = 1500
 
 
 cores = int(sys.argv[2])
