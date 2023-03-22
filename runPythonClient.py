@@ -3,8 +3,9 @@ import sys
 import time
 
 if (len(sys.argv)) != 10:
-    print("This command takes 8 parameters: python runServer.py" +
+    print("This command takes 8 parameters: python runPythonClient.py" +
           " NumberOfSamples TestAcc?y/n treeName ERGMODE metrics dicSplits tableSplits dataset\n")
+    print("Instead received " + str(len(sys.argv)) + " parameters")
     exit(1)
 
 numSamples = sys.argv[1]
