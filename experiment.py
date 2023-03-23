@@ -20,7 +20,7 @@ coresAvailable = "24"
 Dataset to test.
 Values can be:  mnist or traffic or restaurant
 """
-dataset = "restaurant"
+dataset = "mnist"
 timeout = "2400"
 ERGmode = "0"
 perfMetrics = "y"
