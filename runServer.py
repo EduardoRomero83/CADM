@@ -76,6 +76,9 @@ statements.append("Changing number of features per cluster")
 
 print("Dataset is: " + dataset)
 for k in range(int(replicas)):
+    samplesInReplica = numSamples // int(replicas)
+    if k < (numSamples % int(replicas)):
+        samplesInReplica += 1
     for i in range(int(dicSplits)):
       for j in range(int(tabSplits)):
         copyID = k * int(dicSplits) * int(tabSplits) + i * int(tabSplits) + j
@@ -84,11 +87,13 @@ for k in range(int(replicas)):
         statements.append("Copy files")
         cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Changing the ports")
+        cmd.append("sed -i 's/^# *define SAMPLES.*/\#define SAMPLES " + samplesInReplica + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        statements.append("Changing number of samples on replica file")
         cmd.append("sed -i 's/^# *define DICSPLIT.*/\#define DICSPLIT " + str(i) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Assigning dictionary partition")
         cmd.append("sed -i 's/^# *define TABLESPLIT.*/\#define TABLESPLIT " + str(j) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Assigning table partition")
-        cmd.append("sed -i 's/^# *define CLUSTEROFFSET.*/\#define CLUSTEROFFSET " + str(i * numClustersPerFile) + "/' server/srcinline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        cmd.append("sed -i 's/^# *define CLUSTEROFFSET.*/\#define CLUSTEROFFSET " + str(i * numClustersPerFile) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Fixing dic offset")
         cmd.append("sed -i 's/^# *define TABLEOFFSET.*/\#define TABLEOFFSET " + str(j * numPathsPerFile) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Fixing table offset")
