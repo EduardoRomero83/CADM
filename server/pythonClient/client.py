@@ -15,7 +15,7 @@ elif dataset == "traffic":
 else:  #dataset == "traffic":
     readSize = 1500
 
-splits = cores / replicas
+splits = cores // replicas
 
 count = 1
 HOST="127.0.0.1"
