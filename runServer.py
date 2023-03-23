@@ -74,6 +74,7 @@ statements.append("Changing number of bits per sample")
 cmd.append("sed -i 's/^# *define MAXFEAT.*/\#define MAXFEAT " + mpc + "/' server/src/inline.cpp")
 statements.append("Changing number of features per cluster")
 
+print("Dataset is: " + dataset)
 for k in range(int(replicas)):
     for i in range(int(dicSplits)):
       for j in range(int(tabSplits)):
