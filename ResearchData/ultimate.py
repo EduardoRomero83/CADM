@@ -39,14 +39,6 @@ def findManySubstr(l, substr):
     for i, s in enumerate(l):
         if all (x in s for x in substr):
               return i
-       # if substr[0] in s:
-#	    print s
-#	    print i
-#	    print "Found"
-#        if substr[1] in s:
-#	    print s
-#	    print i
-#	    print "Y esto"
     return -1
 
 def findLims(l):

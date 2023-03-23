@@ -61,7 +61,7 @@ def resetReadyFile():
 def runOneExperiment(n, d, m, u):
     if int(m) < int(d):
         return
-    treeName = "RF." + n + "." + d + "." + m + "." + u
+    treeName = "RF." + n + "." + d + "." + m + "." + u + "." + replicas + "." + dicSplits + "." + tableSplits
     print(treeName)
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
                   numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset, coresAvailable]

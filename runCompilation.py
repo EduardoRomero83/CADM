@@ -27,6 +27,7 @@ dataset = sys.argv[12]
 coresAvailable = sys.argv[13]
 
 treeName = "RF." + numTrees + "." + maxDepth + "." + mpc + "." + maxUnk
+
 cmd = []
 statements = []
 
