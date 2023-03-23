@@ -15,7 +15,7 @@ elif dataset == "traffic":
 else:  #dataset == "traffic":
     readSize = 1500
 
-splits = cores / replicas
+splits = cores // replicas
 
 count = 1
 HOST="127.0.0.1"
@@ -48,7 +48,7 @@ while (i < numSamples):
     i=i+1
 infile.close()
 for i in range(replicas):
-    for j in range(cores):
+    for j in range(splits):
         sArr[i][j].close()
 print("Client done")
 
