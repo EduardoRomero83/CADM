@@ -77,7 +77,7 @@ statements.append("Changing number of features per cluster")
 print("Dataset is: " + dataset)
 for k in range(int(replicas)):
     samplesInReplica = int(numSamples) // int(replicas)
-    if k < (numSamples % int(replicas)):
+    if k < (int(numSamples) % int(replicas)):
         samplesInReplica += 1
     for i in range(int(dicSplits)):
       for j in range(int(tabSplits)):
