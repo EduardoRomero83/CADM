@@ -76,7 +76,7 @@ statements.append("Changing number of features per cluster")
 
 print("Dataset is: " + dataset)
 for k in range(int(replicas)):
-    samplesInReplica = numSamples // int(replicas)
+    samplesInReplica = int(numSamples) // int(replicas)
     if k < (numSamples % int(replicas)):
         samplesInReplica += 1
     for i in range(int(dicSplits)):
@@ -87,7 +87,7 @@ for k in range(int(replicas)):
         statements.append("Copy files")
         cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Changing the ports")
-        cmd.append("sed -i 's/^# *define SAMPLES.*/\#define SAMPLES " + samplesInReplica + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
+        cmd.append("sed -i 's/^# *define SAMPLES.*/\#define SAMPLES " + str(samplesInReplica) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Changing number of samples on replica file")
         cmd.append("sed -i 's/^# *define DICSPLIT.*/\#define DICSPLIT " + str(i) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Assigning dictionary partition")
