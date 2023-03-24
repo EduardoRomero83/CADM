@@ -12,9 +12,9 @@ numTrees = [str(x) for x in [10]]
 depth = [str(x) for x in [8]]
 mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
-dicSplits = "1"
-tableSplits = "1"
-replicas = "1"
+dicSplits = "4"
+tableSplits = "2"
+replicas = "3"
 coresAvailable = "24"
 """
 Dataset to test.
@@ -77,6 +77,7 @@ def runOneExperiment(n, d, m, u):
         print(treeName + " succeeded")
     else:
         print(treeName + " failed")
+    cmd = ["pkill", "boltserver*"]
 
 print('Running experiment')
 for n in numTrees:
