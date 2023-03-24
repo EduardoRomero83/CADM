@@ -105,19 +105,22 @@ for k in range(int(replicas)):
             statements.append("Fixing table upper bound")
         cmd.append("cd server/src/; g++  -o boltserver" + str(k) + "." + str(i) + "." + str(j) + ".out -funsafe-loop-optimizations -funroll-all-loops -O3 inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp; cd ../../") 
         statements.append("Compile C++ file")
-    
+        executableFile = " ./server/src/boltserver" + str(k) + "." + str(i) + "." + str(j) + ".out "
+        timeoutputFile = "./ResearchData/raw/" + fullTreeName + ".replica" + str(k) + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt"
+        logsFile = "./logs/" + fullTreeName + ".replica" + str(k) + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".logs.txt"
+        classOutputFile = "server/testaccuracy/temp" + str(k) + "." + str(i) + "." + str(j) + ".txt"
         if metrics:
           if ergmode == '0':
               #c = ["./server/src/server" + i + ".out", treeName, ">>", "./ResearchData/raw/" + treeName + ".time.txt", "&", "echo"]
-              cmd2.append("taskset " + str(coreMask) + " ./server/src/boltserver" + str(k) + "." + str(i) + "." + str(j) + ".out " + shortTreeName + " >> ./ResearchData/raw/" + fullTreeName + ".replica" + str(k) + ".dicSplit" + str(i) + ".tabSplit" + str(j) + ".time.txt & echo $! > ./temps/pid" + ergmode)
+              cmd2.append("taskset " + str(coreMask) + executableFile + shortTreeName + " >> " + timeoutputFile + " 2>> " + logsFile + " & echo $! > ./temps/pid" + ergmode)
               cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + fullTreeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
           else:
-              cmd2.append("taskset " + str(coreMask) + " ./server/src/boltserver" + str(k) + "." + str(i) + "." + str(j) + ".out " + shortTreeName + " > server/testaccuracy/temp" + str(k) + "." + str(i) + "." + str(j) + " & echo $! > ./temps/pid" + ergmode)
+              cmd2.append("taskset " + str(coreMask) + executableFile + shortTreeName + " > " + classOutputFile + " 2>> " + logsFile + " & echo $! > ./temps/pid" + ergmode)
               cmd2.append("perf stat --field-separator=, -o ./ResearchData/raw/" + fullTreeName + "." + ergmode + ".core" + str(copyID) + ".serverperf -e cpu-cycles,instructions,branches,branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses -p ")
           statements.append("Run server")
     
         else:
-          cmd2.append("taskset " + str(coreMask) + " ./server/src/boltserver" + str(k) + "." + str(i) + "." + str(j) + ".out " +  shortTreeName + " > server/testaccuracy/temp" + str(k) + "." + str(i) + "." + str(j))
+          cmd2.append("taskset " + str(coreMask) + executableFile +  shortTreeName + " > " + classOutputFile)
           statements.append("Run server")
 
 i = 0

@@ -78,6 +78,7 @@ def runOneExperiment(n, d, m, u):
     else:
         print(treeName + " failed")
     cmd = ["pkill", "boltserver*"]
+    subprocess.call(cmd)
 
 print('Running experiment')
 for n in numTrees:
