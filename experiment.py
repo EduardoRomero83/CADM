@@ -12,9 +12,9 @@ numTrees = [str(x) for x in [10]]
 depth = [str(x) for x in [8]]
 mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
-dicSplits = "4"
-tableSplits = "2"
-replicas = "3"
+dicSplits = "1"
+tableSplits = "1"
+replicas = "1"
 coresAvailable = "24"
 """
 Dataset to test.
