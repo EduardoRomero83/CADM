@@ -12,9 +12,9 @@ numTrees = [str(x) for x in [10]]
 depth = [str(x) for x in [8]]
 mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
-dicSplits = "1"
-tableSplits = "1"
-replicas = "1"
+dicSplits = [str(x) for x in [1, 2, 4, 8]]
+tableSplits = [str(x) for x in [1]]
+replicas = [str(x) for x in [1, 2, 4, 8]]
 coresAvailable = "24"
 """
 Dataset to test.
@@ -58,7 +58,7 @@ def resetReadyFile():
         f.close()
 
 
-def runOneExperiment(n, d, m, u):
+def runOneExperiment(n, d, m, u, replicas, dicSplits, tableSplits):
     if int(m) < int(d):
         return
     treeName = "RF." + n + "." + d + "." + m + "." + u + "." + replicas + "." + dicSplits + "." + tableSplits
@@ -85,7 +85,10 @@ for n in numTrees:
     for d in depth:
         for m in mpc:
             for u in maxUnk:
-                runOneExperiment(n, d, m, u)
+                for r in replicas:
+                    for ds in dicSplits:
+                        for ts in tableSplits:
+                            runOneExperiment(n, d, m, u, r, ds, ts)
 
 
 cmd = ["python3", "./ResearchData/ultimate.py"]
