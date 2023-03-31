@@ -101,7 +101,8 @@ for i in range(replicas):
                   replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
     allReplicas.append(replicaCompilation)
 
-finalAnswers = []    
+finalAnswers = []  
+print(len(allReplicas))  
 for i in range(numSamples):
     replicaIndex = i % replicas
     sampleIndex = i // replicas
