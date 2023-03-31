@@ -93,21 +93,14 @@ for i in range(replicas):
           for sample in predictions:
               values = sample.strip().split(',')[:-1]
               intValues = list(filter(lambda x: x != '', map(int, values)))
-              print(intValues)
               samples.append(intValues)
           if replicaCompilation == []:
-              print(len(samples))
               replicaCompilation = list(samples)
               continue
           for l in range(len(samples)):
               for m in range(len(samples[l])):
                   replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
-    print(len(replicaCompilation))
-    print(len(replicaCompilation[0]))
     allReplicas.append(replicaCompilation)
-    print(len(allReplicas))
-    print(len(allReplicas[0]))
-    print(len(allReplicas[0][0]))
 
 finalAnswers = []  
 for i in range(numSamples):
@@ -119,7 +112,7 @@ endTime = time.monotonic()
 
 with open(outputFile, 'w+') as f:
     for answer in finalAnswers:
-        f.write(str(answer))
+        f.write(str(answer) + "\n")
 
 sendTime = endSendTime - startTime
 serverTotalTime = pidsDoneTime - startTime
