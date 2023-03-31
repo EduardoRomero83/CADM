@@ -103,6 +103,7 @@ for i in range(replicas):
               for m in range(len(samples[l])):
                   replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
     print(len(replicaCompilation))
+    print(len(replicaCompilation[0]))
     allReplicas.append(replicaCompilation)
     print(len(allReplicas))
 
