@@ -1,3 +1,4 @@
+import psutil
 import socket
 import sys
 
@@ -30,14 +31,21 @@ for j in range(replicas):
       replicaSockets.append(s)
     sArr.append(replicaSockets)
 
-i = 0
+print("Finding processes")
+processName = "boltserver"
+pids = []
+for proc in psutil.process_iter(['pid', 'name']):
+    if proc.info['name'].contains(processName):
+        pids.append(proc.info['pid'])
+print("The pids are: " + str(pids))
+
 if dataset == "mnist":
     infile = open("server/pythonClient/mnist.dump","rb")
 else:
     infile = open("server/pythonClient/traffic.dump","rb")
 print("Sending from client")
 
-
+i = 0
 while (i < numSamples):
     img = infile.read(readSize)
     offset = i % replicas
