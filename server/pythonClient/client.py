@@ -91,19 +91,20 @@ for i in range(replicas):
               predictions = f.readlines()
           samples = []
           for sample in predictions:
-              print(sample)
               values = sample.strip().split(',')[:-1]
-              print(values)
-              intValues = list(filter(lambda x: x != '', map(int, values)))
+              intValues = list(filter(lambda x: x.strip() != '', map(int, values)))
               print(intValues)
               samples.append(intValues)
           if replicaCompilation == []:
+              print(len(samples))
               replicaCompilation.append(samples)
               continue
           for l in range(len(samples)):
               for m in range(len(samples[l])):
                   replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
+    print(len(replicaCompilation))
     allReplicas.append(replicaCompilation)
+    print(len(allReplicas))
 
 finalAnswers = []  
 print(len(allReplicas[0]))  
