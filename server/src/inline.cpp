@@ -400,10 +400,6 @@ for (int testX = real_start; testX < real_stop; testX=testX+(NB) ) {
     // 5.Break if currentFeature is important and does not match common at position 
     // 6.Update loop variables
     while( ((unsigned int)cfLoopBreak < clusterFeatures)  ) {
-      #if ERGMODE == 4
-      printf("Loop through cluster feats \n");
-      fflush(stdout);
-      #endif
       // 1
       feature newFeat = clusters[i].ft[ftc];
       unsigned short c1ftfeat = newFeat.feat; //clusters[i].ft[ftc].feat;
@@ -463,15 +459,16 @@ printf("\n");
 
 unsigned int worthit= 0;
 worthit = lookup & clusters[i].important;
-#if ERGMODE == 5
+#if ERGMODE == 4
 printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, clusters[i].signature, worthit, clusters[i].common, clusters[i].important);
+fflush(stdout);
 #endif
-
 
  if ( (worthit== clusters[i].common)) {
 
-  #if ERGMODE == 5
+  #if ERGMODE == 4
   printf("Made a lookup\n");
+  fflush(stdout);
   #endif
   unsigned char signature = 0;
   unsigned int tempResps[NUMCLASSES] = { };
