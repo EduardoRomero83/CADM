@@ -1,6 +1,8 @@
+import os
 import psutil
 import socket
 import sys
+import time
 
 predicted = []
 times = []
@@ -45,6 +47,8 @@ else:
     infile = open("server/pythonClient/traffic.dump","rb")
 print("Sending from client")
 
+startTime = time.monotonic()
+
 i = 0
 while (i < numSamples):
     img = infile.read(readSize)
@@ -58,6 +62,22 @@ infile.close()
 for i in range(replicas):
     for j in range(splits):
         sArr[i][j].close()
+        
+endSendTime = time.monotonic()
+
+for pid in pids:
+    os.waitpid(pid, 0)
+    
+pidsDoneTime = time.monotonic()
+
+sendTime = endSendTime - startTime
+serverTotalTime = pidsDoneTime - startTime
+
+print("Send time was: " + str(sendTime))
+print("Server time was: " + str(serverTotalTime))
+
 print("Client done")
+
+
 
 
