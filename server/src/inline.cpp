@@ -466,7 +466,7 @@ fflush(stdout);
 
  if ( (worthit== clusters[i].common)) {
 
-  #if ERGMODE == 5
+  #if ERGMODE == 4
   printf("Made a lookup\n");
   fflush(stdout);
   #endif
@@ -488,9 +488,10 @@ fflush(stdout);
   lookup -= tOffset;
   conf = responses[lookup].rs[0] >> 7;
   signature = responses[lookup].signature;
-  //#if ERGMODE == 5
-  //printf("Conflict: %d, signature: %d\n",conf, signature);
-  //#endif
+  #if ERGMODE == 4
+  printf("Conflict: %d, signature: %d, cluster signature: %d \n",conf, signature, clusters[i].signature);
+  fflush(stdout);
+  #endif
   // First lookup does not have a conflict. Get vote and done
   if ( ( (conf == false) )  &&  (signature == clusters[i].signature)) {
     int i = 0;
