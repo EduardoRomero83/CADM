@@ -331,10 +331,7 @@ for (int testX = real_start; testX < real_stop; testX=testX+(NB) ) {
   //if (testX != (real_start + 784 * 8)) {
      //continue;
   //}
-  #if ERGMODE == 4
-  printf("Looping through samples \n");
-  fflush(stdout);
-  #endif
+
   buffer=&(big_buffer[testX]);
 
   __builtin_prefetch(&(buffer[0]),0,3);
@@ -376,6 +373,10 @@ for (int testX = real_start; testX < real_stop; testX=testX+(NB) ) {
     #if ERGMODE == 2
     clock_gettime(CLOCK_MONOTONIC,&start_t2);// = get_cycles();
     #endif
+      #if ERGMODE == 4
+      printf("Looping 377 \n");
+      fflush(stdout);
+      #endif
 
     unsigned int ftc = 0;
     unsigned int cfLoopBreak = 0;
