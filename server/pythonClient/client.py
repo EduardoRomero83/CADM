@@ -95,9 +95,11 @@ for i in range(replicas):
               samples.append(intValues)
           if replicaCompilation == []:
               replicaCompilation = list(samples)
+              print("Replicacomp was empty")
               continue
           for l in range(len(samples)):
               for m in range(len(samples[l])):
+                  print("Replicacomp was full")
                   replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
     allReplicas.append(replicaCompilation)
 
