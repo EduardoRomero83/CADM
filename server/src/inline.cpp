@@ -482,7 +482,7 @@ fflush(stdout);
 
   hash(lookup, i + cOffset, 2, 23);
   bool conf = false;
-  if ((lookup > tOffset) || lookup >= tabUpper) {
+  if ((lookup < tOffset) || lookup >= tabUpper) {
     #if ERGMODE == 4
     printf("Lookup: %d, toffset: %d, tabUpper: %d \n",lookup, tOffset, tabUpper);
     fflush(stdout);

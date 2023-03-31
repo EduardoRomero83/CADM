@@ -22,7 +22,7 @@ Values can be:  mnist or traffic or restaurant
 """
 dataset = "mnist"
 timeout = "2400"
-ERGmode = "4"
+ERGmode = "1"
 perfMetrics = "y"
 clientAccTest = "n"
 
