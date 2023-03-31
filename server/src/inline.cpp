@@ -583,8 +583,12 @@ printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, cluster
 
     //HERE	  finalResps[max] = finalResps[max] + 1;
   }
+    #if ERGMODE == 1
+    printf("vote is: %d, ", vote);
+        #endif
   if (vote < NUMCLASSES) {
     finalResps[vote]++;
+
   }
  } // if worthit
 
