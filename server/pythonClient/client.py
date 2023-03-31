@@ -10,7 +10,11 @@ times = []
 numSamples = int(sys.argv[1])
 cores = int(sys.argv[2])
 replicas = int(sys.argv[3])
-dataset = sys.argv[4]
+dicSplits = int(sys.argv[4])
+tableSplits = int(sys.argv[5])
+ergmode = int(sys.argv[6])
+dataset = sys.argv[7]
+treename = sys.argv[8]
 if dataset == "mnist":
     readSize = 28*28
 elif dataset == "traffic":
@@ -47,6 +51,9 @@ else:
     infile = open("server/pythonClient/traffic.dump","rb")
 print("Sending from client")
 
+serverOutputFileBase = "server/testaccuracy/temp"
+outputFile = "server/testaccuracy/" + treename + ".compiled.txt"
+
 startTime = time.monotonic()
 
 i = 0
@@ -73,11 +80,46 @@ for pid in pids:
     
 pidsDoneTime = time.monotonic()
 
+allReplicas = []
+for i in range(replicas):
+    replicaCompilation = []
+    for j in range(dicSplits):
+      for k in range(tableSplits):
+          serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
+          with open(serverOutputFile, 'r') as f:
+              predictions = f.readlines()
+          samples = []
+          for sample in predictions:
+              values = sample.strip().split(',')
+              intValues = list(filter(lambda x: x != '', map(int, values)))
+              samples.append(intValues)
+          if replicaCompilation == []:
+              replicaCompilation = list(samples)
+              continue
+          for l in range(len(samples)):
+              for m in range(len(samples[l])):
+                  replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
+    allReplicas.append(replicaCompilation)
+
+finalAnswers = []    
+for i in range(numSamples):
+    replicaIndex = i % replicas
+    sampleIndex = i // replicas
+    finalAnswers.append(allReplicas[replicaIndex][sampleIndex])
+    
+endTime = time.monotonic()
+
+with open(outputFile, 'wb+') as f:
+    for answer in finalAnswers:
+        f.write(str(answer))
+
 sendTime = endSendTime - startTime
 serverTotalTime = pidsDoneTime - startTime
+totalTime = endTime - startTime
 
 print("Send time was: " + str(sendTime))
 print("Server time was: " + str(serverTotalTime))
+print("Total time was: " + str(totalTime))
 
 print("Client done")
 
