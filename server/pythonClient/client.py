@@ -94,7 +94,7 @@ for i in range(replicas):
               intValues = list(filter(lambda x: x != '', map(int, values)))
               samples.append(intValues)
           if replicaCompilation == []:
-              replicaCompilation = list(samples)
+              replicaCompilation.append(samples)
               print("Replicacomp was empty")
               continue
           for l in range(len(samples)):
