@@ -117,7 +117,7 @@ for i in range(numSamples):
     
 endTime = time.monotonic()
 
-with open(outputFile, 'wb+') as f:
+with open(outputFile, 'w+') as f:
     for answer in finalAnswers:
         f.write(str(answer))
 
