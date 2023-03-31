@@ -92,9 +92,9 @@ for i in range(replicas):
           samples = []
           for sample in predictions:
               print(sample)
-              values = sample.strip().split(',')
+              values = sample.strip().split(',')[:-1]
               print(values)
-              intValues = list(filter(lambda x: x.strip() != '', map(int, values)))
+              intValues = list(filter(lambda x: x != '', map(int, values)))
               print(intValues)
               samples.append(intValues)
           if replicaCompilation == []:
