@@ -93,6 +93,8 @@ for i in range(replicas):
               values = sample.strip().split(',')
               intValues = list(filter(lambda x: x != '', map(int, values)))
               samples.append(intValues)
+          print("samples have elements: " + str(len(samples)))
+          print("each with elements: " + str(len(samples[0])))
           if replicaCompilation == []:
               replicaCompilation.append(samples)
               print("Replicacomp was empty")
