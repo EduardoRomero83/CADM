@@ -77,7 +77,8 @@ for pid in pids:
         os.waitpid(pid, 0)
     except:
         continue
-    
+
+time.sleep(1)    
 pidsDoneTime = time.monotonic()
 
 allReplicas = []
