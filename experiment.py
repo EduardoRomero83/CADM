@@ -12,9 +12,9 @@ numTrees = [str(x) for x in [10]]
 depth = [str(x) for x in [8]]
 mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
-dicSplits = [str(x) for x in [1, 2, 4, 8]]
+dicSplits = [str(x) for x in [1]]
 tableSplits = [str(x) for x in [1]]
-replicas = [str(x) for x in [1, 2, 4, 8]]
+replicas = [str(x) for x in [1]]
 coresAvailable = "24"
 """
 Dataset to test.
@@ -22,7 +22,7 @@ Values can be:  mnist or traffic or restaurant
 """
 dataset = "mnist"
 timeout = "2400"
-ERGmode = "0"
+ERGmode = "1"
 perfMetrics = "y"
 clientAccTest = "n"
 
