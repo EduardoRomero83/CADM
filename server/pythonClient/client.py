@@ -89,8 +89,10 @@ for i in range(replicas):
           serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
           while os.path.getsize(serverOutputFile) == 0:
               time.sleep(0.00001)
+              print("waited")
           with open(serverOutputFile, 'r+') as f:
               predictions = f.readlines()
+          print(len(predictions))
           samples = []
           for sample in predictions:
               values = sample.strip().split(',')[:-1]
@@ -105,9 +107,6 @@ for i in range(replicas):
     allReplicas.append(replicaCompilation)
 
 finalAnswers = []  
-print(len(finalAnswers))
-print(len(finalAnswers[0]))
-print(len(finalAnswers[0][0]))
 for i in range(numSamples):
     replicaIndex = i % replicas
     sampleIndex = i // replicas
