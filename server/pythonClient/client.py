@@ -97,7 +97,7 @@ for i in range(replicas):
               samples.append(intValues)
           if replicaCompilation == []:
               print(len(samples))
-              replicaCompilation.append(samples)
+              replicaCompilation = list(samples)
               continue
           for l in range(len(samples)):
               for m in range(len(samples[l])):
