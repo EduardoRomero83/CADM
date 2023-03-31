@@ -459,14 +459,14 @@ printf("\n");
 
 unsigned int worthit= 0;
 worthit = lookup & clusters[i].important;
-#if ERGMODE == 4
+#if ERGMODE == 5
 printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, clusters[i].signature, worthit, clusters[i].common, clusters[i].important);
 fflush(stdout);
 #endif
 
  if ( (worthit== clusters[i].common)) {
 
-  #if ERGMODE == 4
+  #if ERGMODE == 5
   printf("Made a lookup\n");
   fflush(stdout);
   #endif
@@ -497,6 +497,10 @@ fflush(stdout);
     int currentByte = 0;
     int currentBit = 1;
     vote = responses[lookup].rs[2];
+      #if ERGMODE == 4
+      printf("Made a vote\n");
+      fflush(stdout);
+      #endif
     //#if ERGMODE == 5
     //printf("Responses[%d] = %x, %x, %x\n", lookup, responses[lookup].rs[0],responses[lookup].rs[1],responses[lookup].rs[2]);
     //#endif
