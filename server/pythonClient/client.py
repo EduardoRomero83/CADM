@@ -90,8 +90,11 @@ for i in range(replicas):
               predictions = f.readlines()
           samples = []
           for sample in predictions:
+              print(sample)
               values = sample.strip().split(',')
+              print(values)
               intValues = list(filter(lambda x: x != '', map(int, values)))
+              print(intValues)
               samples.append(intValues)
           print("samples have elements: " + str(len(samples)))
           print("each with elements: " + str(len(samples[0])))
