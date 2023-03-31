@@ -86,8 +86,10 @@ for i in range(replicas):
     for j in range(dicSplits):
       for k in range(tableSplits):
           serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
-          with open(serverOutputFile, 'r') as f:
+          with open(serverOutputFile, 'r+') as f:
+              print(serverOutputFile)
               predictions = f.readlines()
+              print(len(predictions))
           samples = []
           for sample in predictions:
               print(sample)
