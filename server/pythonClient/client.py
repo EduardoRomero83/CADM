@@ -78,7 +78,7 @@ for pid in pids:
     except:
         continue
 
-time.sleep(1)    
+#time.sleep(1)    
 pidsDoneTime = time.monotonic()
 
 allReplicas = []
@@ -87,6 +87,8 @@ for i in range(replicas):
     for j in range(dicSplits):
       for k in range(tableSplits):
           serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
+          while os.path.getsize(serverOutputFile) == 0:
+              time.sleep(0.00001)
           with open(serverOutputFile, 'r+') as f:
               predictions = f.readlines()
           samples = []
