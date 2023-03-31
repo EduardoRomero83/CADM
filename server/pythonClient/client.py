@@ -24,6 +24,8 @@ else:  #dataset == "traffic":
 
 splits = cores // replicas
 
+expectedBytes = 300000 / cores
+
 count = 1
 HOST="127.0.0.1"
 PORT=7878
@@ -87,10 +89,10 @@ for i in range(replicas):
     for j in range(dicSplits):
       for k in range(tableSplits):
           serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
-          while os.path.getsize(serverOutputFile) == 0:
-              time.sleep(0.00001)
+          while os.path.getsize(serverOutputFile) < expectedBytes:
+              time.sleep(0.001)
               print("waited")
-          with open(serverOutputFile, 'r+') as f:
+          with open(serverOutputFile, 'r') as f:
               predictions = f.readlines()
           print(len(predictions))
           samples = []
