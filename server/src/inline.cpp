@@ -331,6 +331,10 @@ for (int testX = real_start; testX < real_stop; testX=testX+(NB) ) {
   //if (testX != (real_start + 784 * 8)) {
      //continue;
   //}
+  #if ERGMODE == 4
+  printf("Looping through samples \n");
+  fflush(stdout);
+  #endif
   buffer=&(big_buffer[testX]);
 
   __builtin_prefetch(&(buffer[0]),0,3);
@@ -457,7 +461,6 @@ printf("\n");
 
 unsigned int worthit= 0;
 worthit = lookup & clusters[i].important;
-
 #if ERGMODE == 5
 printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, clusters[i].signature, worthit, clusters[i].common, clusters[i].important);
 #endif
@@ -583,9 +586,6 @@ printf("cid: %d, clusterSign %d, lookup: %x, common: %x, imp: %x \n", i, cluster
 
     //HERE	  finalResps[max] = finalResps[max] + 1;
   }
-    #if ERGMODE == 1
-    printf("vote is: %d, ", vote);
-        #endif
   if (vote < NUMCLASSES) {
     finalResps[vote]++;
 
