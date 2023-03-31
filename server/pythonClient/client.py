@@ -88,26 +88,20 @@ for i in range(replicas):
       for k in range(tableSplits):
           serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
           with open(serverOutputFile, 'r+') as f:
-              print(serverOutputFile)
               predictions = f.readlines()
-              print(len(predictions))
           samples = []
           for sample in predictions:
               print(sample)
               values = sample.strip().split(',')
               print(values)
-              intValues = list(filter(lambda x: x != '', map(int, values)))
+              intValues = list(filter(lambda x: x.strip() != '', map(int, values)))
               print(intValues)
               samples.append(intValues)
-          print("samples have elements: " + str(len(samples)))
-          print("each with elements: " + str(len(samples[0])))
           if replicaCompilation == []:
               replicaCompilation.append(samples)
-              print("Replicacomp was empty")
               continue
           for l in range(len(samples)):
               for m in range(len(samples[l])):
-                  print("Replicacomp was full")
                   replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
     allReplicas.append(replicaCompilation)
 
