@@ -66,7 +66,10 @@ for i in range(replicas):
 endSendTime = time.monotonic()
 
 for pid in pids:
-    os.waitpid(pid, 0)
+    try:
+        os.waitpid(pid, 0)
+    except:
+        continue
     
 pidsDoneTime = time.monotonic()
 
