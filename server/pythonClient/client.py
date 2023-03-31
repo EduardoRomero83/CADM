@@ -35,7 +35,7 @@ print("Finding processes")
 processName = "boltserver"
 pids = []
 for proc in psutil.process_iter(['pid', 'name']):
-    if proc.info['name'].contains(processName):
+    if processName in proc.info['name']:
         pids.append(proc.info['pid'])
 print("The pids are: " + str(pids))
 
