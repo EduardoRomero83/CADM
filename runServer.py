@@ -125,7 +125,6 @@ for k in range(int(replicas)):
 
 i = 0
 for command in cmd:
-    print(statements[i])
     os.system(command) 
     i = i + 1
 
@@ -156,6 +155,5 @@ for j in range(int(dicSplits) * int(tabSplits) * int(replicas)):
     #p2 = subprocess.Popen(cmd2[2*j + 1], shell=True)
   else:
     p1 = subprocess.Popen(cmd2[i], shell=True)
-    print(statements[i])
     i = i + 1
 

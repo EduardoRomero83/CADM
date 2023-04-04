@@ -145,8 +145,6 @@ for command in cmd:
             outfile = command[redirectIndex:]
             command = command[:redirectIndex]
             with open(outfile[1], "w+") as f:
-                print(command)
-                print(outfile)
                 p = subprocess.Popen(command, stdout=f)
                 status = p.wait()
                 if status == 0:

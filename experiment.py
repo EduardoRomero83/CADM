@@ -9,7 +9,7 @@ Hyperparameters for model. If multiple, then all combinations
 of parameters are executed.
 """
 numTrees = ["10"] #[str(x) for x in [10, 20, 40, 80, 100, 200, 1000]]
-depth = ["6"] #[str(x) for x in [4, 8, 16, 32, 64, 128]]
+depth = ["6"] #[str(x) for x in [4, 8, 16, 32]]
 mpc = ["15"] #[str(x) for x in [15, 20, 30, 40]]
 maxUnk = ["8"] #[str(x) for x in [8, 10, 12, 14, 16]]
 dicSplits = ["1"] #[str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
