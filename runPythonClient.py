@@ -22,7 +22,7 @@ pid = 0
 numCores = int(dicSplits) * int(tableSplits) * int(replicas)
 
 print(pidfile)
-cmd = "python3 server/pythonClient/client.py " + numSamples + " " + str(numCores) + " " + replicas + " " + dicSplits + " " + tableSplits + " " + ergmode + " " + dataset + " " + treename + ";"
+cmd = "taskset 1 python3 server/pythonClient/client.py " + numSamples + " " + str(numCores) + " " + replicas + " " + dicSplits + " " + tableSplits + " " + ergmode + " " + dataset + " " + treename + ";"
 print("Run Client")
 
 ready = False

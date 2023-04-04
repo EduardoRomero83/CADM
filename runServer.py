@@ -82,7 +82,7 @@ for k in range(int(replicas)):
     for i in range(int(dicSplits)):
       for j in range(int(tabSplits)):
         copyID = k * int(dicSplits) * int(tabSplits) + i * int(tabSplits) + j
-        coreMask = 1 << (copyID % int(coresAvailable))
+        coreMask = 1 << ((copyID % int(coresAvailable)) + 1)
         cmd.append("cp server/src/inline.cpp server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")
         statements.append("Copy files")
         cmd.append("sed -i 's/^# *define PORT.*/\#define PORT " + str(port + copyID) + "/' server/src/inline" + str(k) + "." + str(i) + "." + str(j) + ".cpp")

@@ -15,14 +15,14 @@ maxUnk = [str(x) for x in [8]]
 dicSplits = [str(x) for x in [1]]
 tableSplits = [str(x) for x in [1]]
 replicas = [str(x) for x in [1]]
-coresAvailable = "24"
+coresAvailable = "23" #subtract one from the total system cores to save it to the client
 """
 Dataset to test.
 Values can be:  mnist or traffic or restaurant
 """
 dataset = "mnist"
 timeout = "2400"
-ERGmode = "1"
+ERGmode = "0"
 perfMetrics = "y"
 clientAccTest = "n"
 
@@ -66,7 +66,7 @@ def runOneExperiment(n, d, m, u, replicas, dicSplits, tableSplits):
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
                   numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset, coresAvailable]
     p1 = subprocess.Popen(cmdCompile)
-    cmdClient = ["timeout", timeout, "python3", "runPythonClient.py", numSamples, clientAccTest,
+    cmdClient = ["timeout", timeout, "taskset", "1", "python3", "runPythonClient.py", numSamples, clientAccTest,
                  treeName, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset]
     time.sleep(60)
     p2status = subprocess.call(cmdClient)
