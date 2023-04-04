@@ -24,6 +24,18 @@ else:  #dataset == "traffic":
 
 splits = cores // replicas
 
+
+print("Finding processes")
+processName = "boltserver"
+pids = []
+foundProcess = False
+while not foundProcess:
+    for proc in psutil.process_iter(['pid', 'name']):
+        if processName in proc.info['name']:
+            pids.append(proc.info['pid'])
+            foundProcess = True
+print("The pids are: " + str(pids))
+
 count = 1
 HOST="127.0.0.1"
 PORT=7878
@@ -36,14 +48,6 @@ for j in range(replicas):
       PORT = PORT + 1
       replicaSockets.append(s)
     sArr.append(replicaSockets)
-
-print("Finding processes")
-processName = "boltserver"
-pids = []
-for proc in psutil.process_iter(['pid', 'name']):
-    if processName in proc.info['name']:
-        pids.append(proc.info['pid'])
-print("The pids are: " + str(pids))
 
 if dataset == "mnist":
     infile = open("server/pythonClient/mnist.dump","rb")
