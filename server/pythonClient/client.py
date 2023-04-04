@@ -24,8 +24,6 @@ else:  #dataset == "traffic":
 
 splits = cores // replicas
 
-expectedBytes = 300000 / cores
-
 count = 1
 HOST="127.0.0.1"
 PORT=7878
@@ -74,59 +72,57 @@ for i in range(replicas):
         
 endSendTime = time.monotonic()
 
-for pid in pids:
-    try:
-        os.waitpid(pid, 0)
-    except:
-        continue
-
-time.sleep(0.1)    
-pidsDoneTime = time.monotonic()
-
-allReplicas = []
-for i in range(replicas):
-    replicaCompilation = []
-    for j in range(dicSplits):
-      for k in range(tableSplits):
-          serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
-          """while os.path.getsize(serverOutputFile) < expectedBytes:
-              time.sleep(0.001)
-              print("waited")"""
-          with open(serverOutputFile, 'r') as f:
-              predictions = f.readlines()
-          samples = []
-          for sample in predictions:
-              values = sample.strip().split(',')[:-1]
-              intValues = list(filter(lambda x: x != '', map(int, values)))
-              samples.append(intValues)
-          if replicaCompilation == []:
-              replicaCompilation = list(samples)
-              continue
-          for l in range(len(samples)):
-              for m in range(len(samples[l])):
-                  replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
-    allReplicas.append(replicaCompilation)
-
-finalAnswers = []  
-for i in range(numSamples):
-    replicaIndex = i % replicas
-    sampleIndex = i // replicas
-    finalAnswers.append(allReplicas[replicaIndex][sampleIndex])
+if ergmode == 1:
+    for pid in pids:
+        try:
+            os.waitpid(pid, 0)
+        except:
+            continue
     
-endTime = time.monotonic()
-
-with open(outputFile, 'w+') as f:
-    for answer in finalAnswers:
-        f.write(str(answer) + "\n")
-
+    time.sleep(0.1)    
+    pidsDoneTime = time.monotonic()
+    
+    allReplicas = []
+    for i in range(replicas):
+        replicaCompilation = []
+        for j in range(dicSplits):
+          for k in range(tableSplits):
+              serverOutputFile = serverOutputFileBase + str(i) + "." + str(j) + "." + str(k) + ".txt" 
+              with open(serverOutputFile, 'r') as f:
+                  predictions = f.readlines()
+              samples = []
+              for sample in predictions:
+                  values = sample.strip().split(',')[:-1]
+                  intValues = list(filter(lambda x: x != '', map(int, values)))
+                  samples.append(intValues)
+              if replicaCompilation == []:
+                  replicaCompilation = list(samples)
+                  continue
+              for l in range(len(samples)):
+                  for m in range(len(samples[l])):
+                      replicaCompilation[l][m] =  replicaCompilation[l][m] + samples[l][m]
+        allReplicas.append(replicaCompilation)
+    
+    finalAnswers = []  
+    for i in range(numSamples):
+        replicaIndex = i % replicas
+        sampleIndex = i // replicas
+        finalAnswers.append(allReplicas[replicaIndex][sampleIndex])
+        
+    endTime = time.monotonic()
+    
+    with open(outputFile, 'w+') as f:
+        for answer in finalAnswers:
+            f.write(str(answer) + "\n")
+    
+    serverTotalTime = pidsDoneTime - startTime
+    totalTime = endTime - startTime
+    
+    print("Server time was: " + str(serverTotalTime))
+    print("Total time was: " + str(totalTime))
+    
 sendTime = endSendTime - startTime
-serverTotalTime = pidsDoneTime - startTime
-totalTime = endTime - startTime
-
 print("Send time was: " + str(sendTime))
-print("Server time was: " + str(serverTotalTime))
-print("Total time was: " + str(totalTime))
-
 print("Client done")
 
 
