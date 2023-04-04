@@ -7,7 +7,9 @@ from sklearn import tree
 import pandas as pd
 import time
 import os
-import sys
+import warnings
+warnings.filterwarnings('ignore')
+
 
 if (len(sys.argv) != 4):
     print("This command takes 3 parameters: python test.py treeName dumpTree?(1/0) dataset\n")

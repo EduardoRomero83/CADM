@@ -3,7 +3,9 @@ import sys
 import pickle
 from sklearn.ensemble import RandomForestClassifier
 
-import sys
+import warnings
+warnings.filterwarnings('ignore')
+
 
 if (len(sys.argv) != 5):
     print("This command takes 4 parameters: python train.py treeName estimators(int) max_depth(int) dataset\n")
