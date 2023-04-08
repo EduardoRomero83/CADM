@@ -139,5 +139,5 @@ with open(outfile, "w") as csvfile:
       try:
         populateRow(filesToFind[i], content[delims[i][0]:delims[i][1]], row) 
       except:
-        print("Exception with " + nameData)
+        pass
     c.writerow(row)
