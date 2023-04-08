@@ -27,7 +27,9 @@ maxUnk = [str(x) for x in [8]]
 dicSplits = [str(x) for x in [1]]
 tableSplits = [str(x) for x in [1]]
 replicas = [str(x) for x in [1]]
+
 coresAvailable = "23" #subtract one from the total system cores to save it to the client
+numSamples = "1"
 """
 Dataset to test.
 Values can be:  mnist or traffic or restaurant
@@ -38,10 +40,10 @@ ERGmode = "0"
 perfMetrics = "y"
 clientAccTest = "n"
 
-if dataset == "mnist":
-    numSamples = "1"#"10000"
+if dataset == "mnist" and numSamples == "":
+    numSamples = "10000"
     numClasses = "10"
-elif dataset == "traffic":
+elif dataset == "traffic" and numSamples == "":
     numSamples = "700000"
     numClasses = "7"
     if os.path.exists('./trainOgForest/SplitData.pkl'):
@@ -50,7 +52,7 @@ elif dataset == "traffic":
         print('SplitData.pkl does not exist; creating SplitData.pkl')
         manipData.doEverything()
         print('created SplitData.pkl; proceeding with experiment')
-elif dataset == "restaurant":
+elif dataset == "restaurant" and numSamples == "":
     numSamples = "5000"
     numClasses = "5"
     if os.path.exists('./trainOgForest/SplitDataR.pkl'):
@@ -76,7 +78,7 @@ def runOneExperiment(n, d, m, u, replicas, dicSplits, tableSplits):
     coresUsed = int(replicas) * int(dicSplits) * int(tableSplits)
     if coresUsed > (3 * int(coresAvailable)):
         return
-    treeName = "RF." + n + "." + d + "." + m + "." + u + "." + replicas + "." + dicSplits + "." + tableSplits
+    treeName = "RF." + n + "." + d + "." + m + "." + u + "." + replicas + "." + dicSplits + "." + tableSplits + "." + numSamples
     print(treeName)
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
                   numSamples, numClasses, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset, coresAvailable]

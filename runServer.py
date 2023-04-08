@@ -21,7 +21,7 @@ replicas = sys.argv[8]
 dataset = sys.argv[9]
 coresAvailable = sys.argv[10]
 
-fullTreeName = shortTreeName + "." + replicas + "." + dicSplits + "." + tabSplits
+fullTreeName = shortTreeName + "." + replicas + "." + dicSplits + "." + tabSplits + "." + numSamples
 
 pathSizeFile = "./metadata/" + shortTreeName + ".numpaths.txt"
 f = open(pathSizeFile)
