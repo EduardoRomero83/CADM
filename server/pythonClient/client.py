@@ -63,6 +63,8 @@ startTime = time.monotonic()
 i = 0
 while (i < numSamples):
     img = infile.read(readSize)
+    if infile.tell() == infile.seek(0,2):
+        infile.seek(0)
     offset = i % replicas
     for j in range(splits): 
         sArr[offset][j].send(img)

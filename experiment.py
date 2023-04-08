@@ -8,6 +8,7 @@ from trainOgForest import manipDataR
 Hyperparameters for model. If multiple, then all combinations
 of parameters are executed.
 """
+"""
 numTrees = [str(x) for x in [10, 20, 40, 80, 100, 200, 1000]]
 depth = [str(x) for x in [4, 6, 8, 16, 32]]
 mpc = [str(x) for x in [15, 20, 30, 40]]
@@ -15,6 +16,17 @@ maxUnk = [str(x) for x in [8, 10, 12, 14, 16]]
 dicSplits = [str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
 tableSplits = [str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
 replicas = [str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
+"""
+"""
+Quick tests below
+"""
+numTrees = [str(x) for x in [10]]
+depth = [str(x) for x in [8]]
+mpc = [str(x) for x in [15]]
+maxUnk = [str(x) for x in [8]]
+dicSplits = [str(x) for x in [1]]
+tableSplits = [str(x) for x in [1]]
+replicas = [str(x) for x in [1]]
 coresAvailable = "23" #subtract one from the total system cores to save it to the client
 """
 Dataset to test.
@@ -27,7 +39,7 @@ perfMetrics = "y"
 clientAccTest = "n"
 
 if dataset == "mnist":
-    numSamples = "10000"
+    numSamples = "1"#"10000"
     numClasses = "10"
 elif dataset == "traffic":
     numSamples = "700000"
