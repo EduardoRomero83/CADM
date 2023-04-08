@@ -40,11 +40,13 @@ ERGmode = "0"
 perfMetrics = "y"
 clientAccTest = "n"
 
-if dataset == "mnist" and numSamples == "":
-    numSamples = "10000"
+if dataset == "mnist":
+    if numSamples == "":
+        numSamples = "10000"
     numClasses = "10"
-elif dataset == "traffic" and numSamples == "":
-    numSamples = "700000"
+elif dataset == "traffic":
+    if numSamples == "":
+        numSamples = "700000"
     numClasses = "7"
     if os.path.exists('./trainOgForest/SplitData.pkl'):
         print('SplitData.pkl exists; proceeding with experiment')
@@ -52,8 +54,9 @@ elif dataset == "traffic" and numSamples == "":
         print('SplitData.pkl does not exist; creating SplitData.pkl')
         manipData.doEverything()
         print('created SplitData.pkl; proceeding with experiment')
-elif dataset == "restaurant" and numSamples == "":
-    numSamples = "5000"
+elif dataset == "restaurant":
+    if numSamples == "":
+        numSamples = "5000"
     numClasses = "5"
     if os.path.exists('./trainOgForest/SplitDataR.pkl'):
         print('SplitDataR.pkl exists; proceeding with experiment')
