@@ -46,7 +46,7 @@ os.system(cmd)
 time.sleep(30)
 
 if test:
-    cmd = "python3 server/testaccuracy/ta.py " + numSamples + " >> ./ResearchData/raw/" + treename + ".acc.server.txt"
+    cmd = "python3 server/testaccuracy/ta.py " + numSamples + " >> ./ResearchData/" + dataset + "raw/" + treename + ".acc.server.txt"
     print("Test Accuracy")
     os.system(cmd)
 

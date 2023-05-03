@@ -112,6 +112,6 @@ for n in numTrees:
                             runOneExperiment(n, d, m, u, r, ds, ts)
 
 
-cmd = ["python3", "./ResearchData/ultimate.py"]
+cmd = ["python3", "./ResearchData/ultimate.py", dataset]
 subprocess.Popen(cmd)
 print('done')

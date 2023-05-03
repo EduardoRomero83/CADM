@@ -1,11 +1,11 @@
 import csv
 import os
-#import sys
+import sys
 
-#treeName = sys.argv[1]
+dataset = sys.argv[1]
 
-indir = "./ResearchData/merged/"
-outfile = "./ResearchData/combined.csv"
+indir = "./ResearchData/" + dataset + "merged/"
+outfile = "./ResearchData/" + dataset + "combined.csv"
 out = []
 
 filesToFind = ["acc.py", "time.txt", "acc.s", "pythonperf", "0.serverperf", "1.serverperf"]

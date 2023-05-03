@@ -2,9 +2,10 @@ import os
 import sys
 
 treeName = sys.argv[1]
+dataset = sys.argv[2]
 
-indir = "./ResearchData/raw/"
-outfile = "./ResearchData/merged/" + treeName + ".data"
+indir = "./ResearchData/" + dataset + "raw/"
+outfile = "./ResearchData/" + dataset + "merged/" + treeName + ".data"
 out = []
 
 for f in sorted(os.listdir(indir)):
