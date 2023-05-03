@@ -9,13 +9,13 @@ Hyperparameters for model. If multiple, then all combinations
 of parameters are executed.
 """
 #"""
-numTrees = [str(x) for x in [10, 40, 100, 200, 1000]]
-depth = [str(x) for x in [8, 16, 32]]
-mpc = [str(x) for x in [15, 20, 30, 40]]
-maxUnk = [str(x) for x in [8, 10, 12, 14, 16]]
-dicSplits = [str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
-tableSplits = [str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
-replicas = [str(x) for x in [1, 2, 4, 8, 16, 20, 23, 24]]
+numTrees = [str(x) for x in [10]]
+depth = [str(x) for x in [5]]
+mpc = [str(x) for x in [15]]
+maxUnk = [str(x) for x in [8]]
+dicSplits = [str(x) for x in [1, 2, 4, 8, 16, 23]]
+tableSplits = [str(x) for x in [1]]
+replicas = [str(x) for x in [1, 2, 4, 8, 16, 23]]
 #"""
 """
 Quick tests below
@@ -40,6 +40,7 @@ timeout = "2400"
 ERGmode = "0"
 perfMetrics = "y"
 clientAccTest = "n"
+skipCombinationOfCores = True
 
 if dataset == "mnist":
     if numSamples == "":
@@ -82,6 +83,8 @@ def runOneExperiment(n, d, m, u, replicas, dicSplits, tableSplits):
     coresUsed = int(replicas) * int(dicSplits) * int(tableSplits)
     if coresUsed > (3 * int(coresAvailable)):
         return
+    if skipCombinationOfCores and int(replicas) > 1 and int(dicSplits) > 1:
+        return
     treeName = "RF." + n + "." + d + "." + m + "." + u + "." + replicas + "." + dicSplits + "." + tableSplits + "." + numSamples
     print(treeName)
     cmdCompile = ["timeout", timeout, "python3", "runCompilation.py", n, d, m, u,
@@ -91,7 +94,7 @@ def runOneExperiment(n, d, m, u, replicas, dicSplits, tableSplits):
                  treeName, ERGmode, perfMetrics, dicSplits, tableSplits, replicas, dataset]
     time.sleep(60)
     p2status = subprocess.call(cmdClient)
-    cmd = ["python3", "./ResearchData/process.py", treeName]
+    cmd = ["python3", "./ResearchData/process.py", treeName, dataset]
     p1status = p1.wait()
     if p1status == 0 and p2status == 0:
         subprocess.call(cmd)
