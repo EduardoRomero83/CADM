@@ -11,13 +11,14 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-if (len(sys.argv) != 4):
-    print("This command takes 3 parameters: python test.py treeName dumpTree?(1/0) dataset\n")
+if (len(sys.argv) != 5):
+    print("This command takes 4 parameters: python test.py treeName dumpTree?(1/0) dataset numSamples\n")
     print("1 means dump trees to ./dot/ directory as dot files")
     exit(1)
 treeName=sys.argv[1]
 treeDump=int(sys.argv[2])
 dataset = sys.argv[3]
+numSamples = sys.argv[4]
 curpath = os.path.abspath(os.curdir)
 
 if dataset == "mnist":
@@ -54,7 +55,7 @@ if __name__ == "__main__":
     print("Made predictions")
     misses = []
     start = time.time()
-    while (i < X_test.shape[0]):
+    while (i < numSamples):
         prediction = forest.predict(X_test[i:i+1,:])
         if (predictions[i] == y_test[i]):
             correct = correct + 1

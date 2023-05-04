@@ -40,10 +40,10 @@ if metrics:
                 "branch-misses,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses," +
                 "LLC-loads,LLC-load-misses", "python3", "trainOgForest/test.py", treeName, "1", dataset])
     statements.append("DOT files extraction")"""
-    cmd.append(["python3", "trainOgForest/test.py", treeName, "1", dataset])
+    cmd.append(["python3", "trainOgForest/test.py", treeName, "1", dataset, numSamples])
     statements.append("DOT files extraction")
 else:
-    cmd.append(["python3", "trainOgForest/test.py", treeName, "1", dataset])
+    cmd.append(["python3", "trainOgForest/test.py", treeName, "1", dataset, numSamples])
     statements.append("DOT files extraction")
 cmd.append(["python3", "paths/dot2paths.py", treeName, numClasses])
 statements.append("DOT to directories")
