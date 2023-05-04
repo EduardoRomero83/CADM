@@ -19,9 +19,9 @@ metadata/*
 paths/RF*
 paths/numericPaths/*
 ResearchData/baseline/*
-ResearchData/merged/*
-ResearchData/raw/*
-ResearchData/combined.csv
+ResearchData/*merged/*
+ResearchData/*raw/*
+ResearchData/*combined.csv
 rootpath.clustering/tempFiles/*
 trainOgForest/__pycache__/*
 binadd/tempFiles/*
