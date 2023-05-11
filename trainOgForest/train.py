@@ -39,6 +39,8 @@ if __name__ == "__main__":
             trainData = pickle.load(f)[0]
         X_train = trainData[trainData.columns.difference(['Severity'])].to_numpy()
         y_train = trainData['Severity'].to_numpy()
+        X_train = X_train[:60000]
+        y_train = y_train[:60000]
     else:
         with open('./trainOgForest/SplitDataR.pkl', 'rb') as f:
             trainData = pickle.load(f)[0]
