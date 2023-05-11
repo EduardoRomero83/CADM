@@ -33,7 +33,7 @@ coresAvailable = "23" #subtract one from the total system cores to save it to th
 numSamples = "1"
 """
 Dataset to test.
-Values can be:  mnist or traffic or restaurant
+Values can be:  mnist or traffic or restaurant or cifar100
 """
 dataset = "mnist"
 timeout = "2400"
@@ -46,6 +46,10 @@ if dataset == "mnist":
     if numSamples == "":
         numSamples = "10000"
     numClasses = "10"
+elif dataset == "cifar100":
+    if numSamples == "":
+        numSamples = "10000"
+    numClasses = "100"
 elif dataset == "traffic":
     if numSamples == "":
         numSamples = "700000"

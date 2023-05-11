@@ -17,6 +17,8 @@ dataset = sys.argv[7]
 treename = sys.argv[8]
 if dataset == "mnist":
     readSize = 28*28
+elif dataset == "cifar100":
+    readSize = 32*32*3
 elif dataset == "traffic":
     readSize = 11 #11 features, 1 byte each
 else:  #dataset == "traffic":
@@ -49,10 +51,7 @@ for j in range(replicas):
       replicaSockets.append(s)
     sArr.append(replicaSockets)
 
-if dataset == "mnist":
-    infile = open("server/pythonClient/mnist.dump","rb")
-else:
-    infile = open("server/pythonClient/traffic.dump","rb")
+infile = open("server/pythonClient/" + dataset + ".dump","rb")
 print("Sending from client")
 
 serverOutputFileBase = "server/testaccuracy/temp"

@@ -23,11 +23,16 @@ curpath = os.path.abspath(os.curdir)
 
 if dataset == "mnist":
     from keras.datasets import mnist
+if dataset == "mnist":
+    from keras.datasets import cifar100
 
 if __name__ == "__main__":
     if dataset == "mnist":
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
         X_test.shape = (10000,784)
+    elif dataset == "cifar100":
+        (X_train, y_train), (X_test, y_test) = cifar100.load_data()
+        X_test.shape = (10000,3072)
     elif dataset == "traffic":
         with open('./trainOgForest/SplitData.pkl', 'rb') as f:
             testData = pickle.load(f)[1]

@@ -48,6 +48,9 @@ statements = []
 if dataset == "mnist":
     nb = "784"
     numclasses = "10"
+elif dataset == "cifar100":
+    nb = "3072"
+    numclasses = "100"
 elif dataset == "traffic":
     nb = "11"
     numclasses = "7"

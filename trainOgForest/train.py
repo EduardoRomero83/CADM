@@ -19,11 +19,18 @@ dataset = sys.argv[4]
 
 if dataset == "mnist":
     from keras.datasets import mnist
+if dataset == "mnist":
+    from keras.datasets import cifar100
 
 if __name__ == "__main__":
     if dataset == "mnist":
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
         X_train = np.reshape(X_train,(60000,784))
+        forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)
+        forest.fit(X_train, y_train)
+    elif dataset == "mnist":
+        (X_train, y_train), (X_test, y_test) = cifar100.load_data()
+        X_train = np.reshape(X_train,(50000,3072))
         forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)
         forest.fit(X_train, y_train)
     elif dataset == "traffic":
