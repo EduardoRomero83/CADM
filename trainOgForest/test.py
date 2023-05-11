@@ -23,7 +23,7 @@ curpath = os.path.abspath(os.curdir)
 
 if dataset == "mnist":
     from keras.datasets import mnist
-if dataset == "mnist":
+if dataset == "cifar100":
     from keras.datasets import cifar100
 
 if __name__ == "__main__":
