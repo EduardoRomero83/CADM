@@ -30,6 +30,7 @@ if __name__ == "__main__":
         forest.fit(X_train, y_train)
     elif dataset == "cifar100":
         (X_train, y_train), (X_test, y_test) = cifar100.load_data()
+        X_train = np.ascontiguousarray(X_train)
         X_train = np.reshape(X_train,(50000,3072))
         forest = RandomForestClassifier(n_estimators=treeEst, max_depth=treeDep)
         forest.fit(X_train, y_train)
