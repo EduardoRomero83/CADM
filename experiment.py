@@ -8,7 +8,7 @@ from trainOgForest import manipDataR
 Hyperparameters for model. If multiple, then all combinations
 of parameters are executed.
 """
-#"""
+"""
 numTrees = [str(x) for x in [10]]
 depth = [str(x) for x in [5]]
 mpc = [str(x) for x in [15]]
@@ -16,11 +16,11 @@ maxUnk = [str(x) for x in [8]]
 dicSplits = [str(x) for x in [1, 2, 4, 8, 16, 23]]
 tableSplits = [str(x) for x in [1]]
 replicas = [str(x) for x in [1, 2, 4, 8, 16, 23]]
-#"""
+"""
 """
 Quick tests below
 """
-"""
+#"""
 numTrees = [str(x) for x in [10]]
 depth = [str(x) for x in [8]]
 mpc = [str(x) for x in [15]]
@@ -28,14 +28,14 @@ maxUnk = [str(x) for x in [8]]
 dicSplits = [str(x) for x in [1]]
 tableSplits = [str(x) for x in [1]]
 replicas = [str(x) for x in [1]]
-"""
+#"""
 coresAvailable = "23" #subtract one from the total system cores to save it to the client
 numSamples = "1"
 """
 Dataset to test.
 Values can be:  mnist or traffic or restaurant or cifar100
 """
-dataset = "mnist"
+dataset = "cifar100"
 timeout = "2400"
 ERGmode = "0"
 perfMetrics = "y"
