@@ -57,13 +57,11 @@ if __name__ == "__main__":
 
     i = 0
     correct = 0
-    predictions = forest.predict(X_test)
-    print("Made predictions")
     misses = []
     start = time.time()
     while (i < int(numSamples)):
         prediction = forest.predict(X_test[i:i+1,:])
-        if (predictions[i] == y_test[i]):
+        if (prediction == y_test[i]):
             correct = correct + 1
         else:
             misses.append(i)
