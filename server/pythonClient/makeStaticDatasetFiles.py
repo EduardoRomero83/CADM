@@ -3,13 +3,14 @@ import pickle
 from keras.datasets import mnist
 from keras.datasets import cifar100
 
-dataset = "restaurant"
+dataset = "cifar100"
 
 if dataset == "mnist":
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
     X_test.shape = (10000,784)
 elif dataset == "cifar100":
     (X_train, y_train), (X_test, y_test) = cifar100.load_data()
+    X_test = np.ascontiguousarray(X_test)
     X_test.shape = (10000,3072)
 elif dataset == "traffic":
     with open('./trainOgForest/SplitData.pkl', 'rb') as f:
