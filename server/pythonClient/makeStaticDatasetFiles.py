@@ -1,3 +1,4 @@
+import numpy as np
 import pickle
 from keras.datasets import mnist
 from keras.datasets import cifar100
@@ -23,6 +24,7 @@ else:
     print("loaded testData restaurant")
 
     X_test = testData[testData.columns.difference(['stars'])].to_numpy()
+    X_test = np.ascontiguousarray(X_test)
     y_test = testData['stars'].to_numpy()
     print(X_test.shape)
 
