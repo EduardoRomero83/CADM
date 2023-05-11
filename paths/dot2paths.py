@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 
 if (len(sys.argv) != 3):
@@ -52,6 +53,7 @@ for tree in directory:
                         #out.write("Leaf")
                         #out.write("\n")
                         try:
+                            line = re.sub(r"(\d+)\n(\d+)", r"\1, \2", line)
                             response = line.split("=")[4].split("[")[1].split("]")[0]
                             array = []
                             numbers = response.split(",")
