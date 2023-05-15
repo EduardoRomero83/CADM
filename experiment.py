@@ -62,7 +62,7 @@ elif dataset == "traffic":
         print('created SplitData.pkl; proceeding with experiment')
 elif dataset == "restaurant":
     if numSamples == "":
-        numSamples = "5000"
+        numSamples = "300"
     numClasses = "5"
     if os.path.exists('./trainOgForest/SplitDataR.pkl'):
         print('SplitDataR.pkl exists; proceeding with experiment')
