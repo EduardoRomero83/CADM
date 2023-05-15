@@ -270,7 +270,7 @@ int main(int argc, char* argv[])
 
     
 
-
+  new_socket.settimeout(10)
   unsigned int O3Count = 0;
   while (total_read < TEST_SIZE) {
     #if ERGMODE == 4
