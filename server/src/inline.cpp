@@ -271,9 +271,9 @@ int main(int argc, char* argv[])
 
   unsigned int O3Count = 0;
   while (total_read < TEST_SIZE) {
-    //#if ERGMODE == 4
+    #if ERGMODE == 4
     printf("Reading data from socket %d of size %d\n",new_socket, total_read);
-    //#endif
+    #endif
     if ((total_read + sizeof(char)*TEST_SIZE) > TEST_SIZE) {
       valread = read(new_socket, &(big_buffer[total_read]), TEST_SIZE - total_read);
     }
