@@ -237,18 +237,6 @@ int main(int argc, char* argv[])
     perror("Accept");
     exit(EXIT_FAILURE);
   }
-  
-  // Set the timeout value in seconds
-    int timeout = 20000;
-    
-    // Set the receive timeout for the socket
-    struct timeval tv;
-    tv.tv_sec = timeout;
-    tv.tv_usec = 0;
-    if (setsockopt(new_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv)) < 0) {
-      perror("setsockopt");
-      exit(EXIT_FAILURE);
-    }
 
   int TEST_SIZE=SAMPLES*NB;
   unsigned char big_buffer[TEST_SIZE];
@@ -283,9 +271,9 @@ int main(int argc, char* argv[])
 
   unsigned int O3Count = 0;
   while (total_read < TEST_SIZE) {
-    #if ERGMODE == 4
+    //#if ERGMODE == 4
     printf("Reading data from socket %d of size %d\n",new_socket, total_read);
-    #endif
+    //#endif
     if ((total_read + sizeof(char)*TEST_SIZE) > TEST_SIZE) {
       valread = read(new_socket, &(big_buffer[total_read]), TEST_SIZE - total_read);
     }
