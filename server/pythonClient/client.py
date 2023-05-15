@@ -18,8 +18,7 @@ treename = sys.argv[8]
 if dataset == "mnist":
     readSize = 28*28
 elif dataset == "cifar100":
-    readSize = 32*32
-    numSamples = numSamples * 3
+    readSize = 32*32*3
 elif dataset == "traffic":
     readSize = 11 #11 features, 1 byte each
 else:  #dataset == "traffic":

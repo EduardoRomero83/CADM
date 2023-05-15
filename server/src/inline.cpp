@@ -239,7 +239,7 @@ int main(int argc, char* argv[])
   }
   
   // Set the timeout value in seconds
-    int timeout = 10;
+    int timeout = 20000;
     
     // Set the receive timeout for the socket
     struct timeval tv;
