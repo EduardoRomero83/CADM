@@ -57,11 +57,17 @@ print("Sending from client")
 serverOutputFileBase = "server/testaccuracy/temp"
 outputFile = "server/testaccuracy/" + treename + ".compiled.txt"
 
+i = 0
+images = []
+while (i < numSamples):
+    img = infile.read(readSize)
+    images.append(img)
+
 startTime = time.monotonic()
 
 i = 0
 while (i < numSamples):
-    img = infile.read(readSize)
+    img = images[i]
     offset = i % replicas
     for j in range(splits): 
         sArr[offset][j].send(img)
