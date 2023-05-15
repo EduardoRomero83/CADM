@@ -22,7 +22,7 @@ Quick tests below
 """
 #"""
 numTrees = [str(x) for x in [10]]
-depth = [str(x) for x in [8]]
+depth = [str(x) for x in [5]]
 mpc = [str(x) for x in [15]]
 maxUnk = [str(x) for x in [8]]
 dicSplits = [str(x) for x in [1]]
@@ -30,7 +30,7 @@ tableSplits = [str(x) for x in [1]]
 replicas = [str(x) for x in [1]]
 #"""
 coresAvailable = "23" #subtract one from the total system cores to save it to the client
-numSamples = "1"
+numSamples = ""
 """
 Dataset to test.
 Values can be:  mnist or traffic or restaurant or cifar100
