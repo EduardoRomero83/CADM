@@ -237,6 +237,18 @@ int main(int argc, char* argv[])
     perror("Accept");
     exit(EXIT_FAILURE);
   }
+  
+  // Set the timeout value in seconds
+    int timeout = 10;
+    
+    // Set the receive timeout for the socket
+    struct timeval tv;
+    tv.tv_sec = timeout;
+    tv.tv_usec = 0;
+    if (setsockopt(new_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv)) < 0) {
+      perror("setsockopt");
+      exit(EXIT_FAILURE);
+    }
 
   int TEST_SIZE=SAMPLES*NB;
   unsigned char big_buffer[TEST_SIZE];
@@ -268,9 +280,7 @@ int main(int argc, char* argv[])
     }
   }
 
-    
 
-  new_socket.settimeout(10)
   unsigned int O3Count = 0;
   while (total_read < TEST_SIZE) {
     #if ERGMODE == 4
