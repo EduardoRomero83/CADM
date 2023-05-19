@@ -38,6 +38,8 @@ while not foundProcess:
             foundProcess = True
 print("The pids are: " + str(pids))
 
+time.sleep(1)
+
 count = 1
 HOST="127.0.0.1"
 PORT=7878
